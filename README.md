@@ -14,13 +14,13 @@ Download this Git.
 Run
 ==
 
-ruby parse_winners.rb
+    ruby parse_winners.rb
 
 
 Output
 ==
 
-The directory ./players contains information on each player in the standard Wikipedia format
+The directory ./players contains information on each player in the standard Wikipedia format for duplicate bridge players. A copy of this has been checked in.
 
 Set up
 ==
@@ -33,27 +33,27 @@ Known Issues
 Garbage In Garbage Out (GIGO) applies. If the original data is wrong, so is the output.
 
 
-1. Some of the data came from the ACBL web site. If they have wrong data, it is GIGO.
+# Some of the data came from the ACBL web site. If they have wrong data, it is GIGO.
 
 Example: Larry Cohen, Larry T. Cohen, Larry N. Cohen. The last two are unique. The "Larry Coohen" is ambiguous. Unfortunately this software does not know the difference between these 3 entries.
 
-2. Married/divorced names.
+# Married/divorced names.
 
 If someone wins different titles with different names, they are not merged.
 
 Known examples:
 
-Kitty Munson/Cooper/Bethe
-Edith Frelich/Kemp/Seligman
-Kerri Shuman/Sanborn
+* Kitty Munson/Cooper/Bethe
+* Edith Frelich/Kemp/Seligman
+* Kerri Shuman/Sanborn
 
 This will have to be a manual fix.
 
-3. The code is ACBL-centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
+# The code is ACBL-centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
 
-4. There is still some missing data, for example, a mapping from name to a WBF ID would be helpful.
+# There is still some missing data, for example, a mapping from name to a WBF ID would be helpful.
 
-5. There is still some missing events/awards, for example Cavendish, IBPA awards,
+# There is still some missing events/awards, for example Cavendish, IBPA awards,
 
 Upkeep
 ==
@@ -71,24 +71,14 @@ To automatically edit a Wikipedia page of Bridge players, and add links to playe
 
 Create a file input.txt that contains the data to edit, e.g. the Winners section from the Blu Ribbons.
 
-  ruby add_links.rb
+    ruby add_links.rb
 
+The file output.txt contains the replacement text. Before replacing, I suggest comparing the two files
 
-README.md
-acbl_hof.csv
-acbl_kob.csv
-acbl_poy.csv
-add_links.rb
-bermuda_bowl.csv
-events.csv
-fishbein.csv
-goren.csv
-herman.csv
-mott-smith.csv
-parse_winners.rb
-winners.csv
-world_mixed_pairs.csv
-world_open_pairs.csv
+    diff input.txt output.txt
 
+Copyright
+==
 
+The original data is public, i.e. on the Internet. I have done nothing more than collect that information and put it in a spreadsheet.
 
