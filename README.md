@@ -30,13 +30,13 @@ The file winners.csv contains the list of winners/runners-up from ACBL events. T
 Known Issues
 ==
 
+
+#### GIGO
+
 Garbage In Garbage Out (GIGO) applies. If the original data is wrong, so is the output.
-
-### GIGO
-
 Some of the data came from the ACBL web site. If they have wrong data, it is GIGO.
 
-Example: Larry Cohen, Larry T. Cohen, Larry N. Cohen. The last two are unique. The "Larry Coohen" is ambiguous. Unfortunately this software does not know the difference between these 3 entries.
+Example: Larry Cohen, Larry T. Cohen, Larry N. Cohen are all listed as NABC winners on the ACBL web site. The last two are unique. The "Larry Coohen" is ambiguous. Unfortunately this software does not know the difference between these 3 entries.
 
 #### Married/divorced names.
 ===
@@ -51,18 +51,21 @@ Known examples:
 
 This will have to be a manual fix.
 
-3. The code is ACBL-centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
+#### ACBL/US Centric
+The code is ACBL-centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
 
-4. There is still some missing data, for example, a mapping from name to a WBF ID would be helpful.
+#### Missing Data
+There is still some missing data, for example, a mapping from name to a WBF ID would be helpful.
 
-5. There is still some missing events/awards, for example Cavendish, IBPA awards,
+#### Missing Awards/Events
+There is still some missing events/awards, for example Cavendish, IBPA awards,
 
 Upkeep
 ==
 
 The file events.csv contains a list of all events that are processed, along with a URL that has the information where the data was extracted.
 
-As a new event occurs, the URL information should be updated in events.csv.
+As a new event occurs, the URL information should be updated in events.csv. As a better reference becomes available, we should use that.
 
 The file winners.csv is generated from an Excel file. I have checked in a copy, to make it easier for others to run, but do not make any edits to it. These will be lost when a new version is generated.
 
@@ -84,3 +87,7 @@ Copyright
 
 The original data is public, i.e. on the Internet. I have done nothing more than collect that information and put it in a spreadsheet.
 
+License
+==
+
+All of this under the MIT License. See LICENSE.
