@@ -32,14 +32,13 @@ Known Issues
 
 Garbage In Garbage Out (GIGO) applies. If the original data is wrong, so is the output.
 
-GIGO
-===
+### GIGO
 
 Some of the data came from the ACBL web site. If they have wrong data, it is GIGO.
 
 Example: Larry Cohen, Larry T. Cohen, Larry N. Cohen. The last two are unique. The "Larry Coohen" is ambiguous. Unfortunately this software does not know the difference between these 3 entries.
 
-Married/divorced names.
+#### Married/divorced names.
 ===
 
 If someone wins different titles with different names, they are not merged.
