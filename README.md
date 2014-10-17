@@ -30,7 +30,6 @@ The file winners.csv contains the list of winners/runners-up from ACBL events. T
 Known Issues
 ==
 
-
 #### GIGO
 
 Garbage In Garbage Out (GIGO) applies. If the original data is wrong, so is the output.
@@ -38,8 +37,7 @@ Some of the data came from the ACBL web site. If they have wrong data, it is GIG
 
 Example: Larry Cohen, Larry T. Cohen, Larry N. Cohen are all listed as NABC winners on the ACBL web site. The last two are unique. The "Larry Coohen" is ambiguous. Unfortunately this software does not know the difference between these 3 entries.
 
-#### Married/divorced names.
-===
+#### Married/Divorced Names
 
 If someone wins different titles with different names, they are not merged.
 
@@ -52,13 +50,13 @@ Known examples:
 This will have to be a manual fix.
 
 #### ACBL/US Centric
-The code is ACBL-centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
+The code is ACBL centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
 
 #### Missing Data
 There is still some missing data, for example, a mapping from name to a WBF ID would be helpful.
 
 #### Missing Awards/Events
-There is still some missing events/awards, for example Cavendish, IBPA awards,
+There is still some missing events/awards, for example Cavendish, IBPA awards, dOrsi Bowl, Venice Cup.
 
 Upkeep
 ==
@@ -81,6 +79,18 @@ Create a file input.txt that contains the data to edit, e.g. the Winners section
 The file output.txt contains the replacement text. Before replacing, I suggest comparing the two files
 
     diff input.txt output.txt
+
+Example
+==
+
+Download Git
+
+    ruby parse_winners.rb
+		cd players
+		cat Lew\ Stansby
+		# Go to Wikipedia. Look at entries under "Bridge accomplishments"
+		# Edit the entry
+		# Cut/paste the contents to Wikipedia
 
 Copyright
 ==
