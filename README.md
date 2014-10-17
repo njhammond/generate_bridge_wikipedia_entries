@@ -5,6 +5,8 @@ Automatically generate the Bridge accomplishments entries for Duplicate Bridge p
 
 Given a set of CSV files that contains a list of awards, honors, winners from Bridge events, the script generates the Bridge accomplishments for each player.
 
+See the players directory for a list of current output.
+
 Install
 ==
 
@@ -72,13 +74,17 @@ Automatically Generate Links
 
 To automatically edit a Wikipedia page of Bridge players, and add links to players' names, use the add_links.rb script.
 
-Create a file input.txt that contains the data to edit, e.g. the Winners section from the Blu Ribbons.
+Create a file input.txt that contains the data to edit, e.g. the Winners section from the Blue Ribbons.
 
+		cat > input.txt
+		# Paste in data from Winners section of a Wikipedia entry
     ruby add_links.rb
 
 The file output.txt contains the replacement text. Before replacing, I suggest comparing the two files
 
     diff input.txt output.txt
+
+Be careful. This tool makes no distinction between "Charles Coon" the bridge player, and the two other Charles Coon entries on Wikipedia. Edit the file conversion_list.txt before running the add_ilnks.rb script if needed.
 
 Example
 ==
