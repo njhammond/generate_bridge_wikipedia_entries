@@ -33,27 +33,27 @@ Known Issues
 Garbage In Garbage Out (GIGO) applies. If the original data is wrong, so is the output.
 
 
-# Some of the data came from the ACBL web site. If they have wrong data, it is GIGO.
+1 . Some of the data came from the ACBL web site. If they have wrong data, it is GIGO.
 
 Example: Larry Cohen, Larry T. Cohen, Larry N. Cohen. The last two are unique. The "Larry Coohen" is ambiguous. Unfortunately this software does not know the difference between these 3 entries.
 
-# Married/divorced names.
+2. Married/divorced names.
 
 If someone wins different titles with different names, they are not merged.
 
 Known examples:
 
-* Kitty Munson/Cooper/Bethe
-* Edith Frelich/Kemp/Seligman
-* Kerri Shuman/Sanborn
+  * Kitty Munson/Cooper/Bethe
+  * Edith Frelich/Kemp/Seligman
+  * Kerri Shuman/Sanborn
 
 This will have to be a manual fix.
 
-# The code is ACBL-centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
+3. The code is ACBL-centric/US centric. If someone wants to create something similar for another National Bridge Organization (NBO), go for it.
 
-# There is still some missing data, for example, a mapping from name to a WBF ID would be helpful.
+4. There is still some missing data, for example, a mapping from name to a WBF ID would be helpful.
 
-# There is still some missing events/awards, for example Cavendish, IBPA awards,
+5. There is still some missing events/awards, for example Cavendish, IBPA awards,
 
 Upkeep
 ==
