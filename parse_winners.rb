@@ -1,4 +1,5 @@
 #!/bin/ruby
+# Copyright (C) 2014 Nicolas Hammond
 # Script to take as input various CSV files and create output in "players" directory.
 # Each player that is listed in the CSV files will have an entry in players.
 
@@ -40,8 +41,12 @@ d1 = today.strftime("%Y-%m-%d")
 #fishbein_ref = "<
 #fishbein_ref = "<ref>{{cite news
 
-von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge von Zedtwitz Award]</ref>"
-blackwood_ref = "<ref>[http://www.fpabridge.org/blackwood.htm Foundation for the Preservation and Advancement of Bridge Blackwood Award]</ref>"
+von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge - von Zedtwitz Award]</ref>"
+blackwood_ref = "<ref>[http://www.fpabridge.org/blackwood.htm Foundation for the Preservation and Advancement of Bridge - Blackwood Award]</ref>"
+wbf_ref = "<ref>[http://www.worldbridge.org/world-team-championships.aspx World Team Championship Winners]</ref>"
+transnational_ref = "<ref>[http://www.worldbridge.org/transnational-open-teams.aspx World Transational Open Teams Winners]</ref>"
+rosenblum_ref = "<ref>[http://www.worldbridge.org/world-open-teams.aspx Rosenblum Cup Winners]</ref>"
+world_senior_teams_ref = "<ref>[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
 # | title = "Fishbein"
 # | author = 
 # | publisher = American Contract Bridge League
@@ -80,6 +85,18 @@ acbl_hof_data.each_line do |csv_row|
   e = $acbl_hofs_db[name]
   e[:year] = year
   e[:ref] = ref
+end
+
+# Read in mapping from player name to WBF ID
+wbf_id_data = File.read("wbf_ids.csv")
+wbf_ids = Array.new
+$wbf_ids_db = Hash.new { |h, k| h[k] = Hash.new(0) }
+wbf_id_data.each_line do |csv_row|
+	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
+  name = fields[0]
+  id = fields[1]
+  e = $wbf_ids_db[name]
+  e[:id] = id
 end
 
 # Data with positions.
@@ -123,9 +140,15 @@ end
 
 # Bermuda Bowl
 $bermuda_bowl_winners = read_year_position_name("bermuda_bowl.csv")
+$buffett_cup_winners = read_year_position_name("buffett_cup.csv")
+$venice_cup_winners = read_year_position_name("venice_cup.csv")
+$dorsi_bowl_winners = read_year_position_name("dorsi_bowl.csv")
+$transnational_teams_winners = read_year_position_name("transnational_teams.csv")
+$rosenblum_winners = read_year_position_name("rosenblum.csv")
 # World events
 $world_open_pairs_winners = read_year_position_name("world_open_pairs.csv")
 $world_mixed_pairs_winners = read_year_position_name("world_mixed_pairs.csv")
+$world_senior_teams_winners = read_year_position_name("world_senior_teams.csv")
 
 # ACBL King of Bridge (handles queen as well)
 $acbl_kob_winners = read_award_data("acbl_kob.csv")
@@ -208,14 +231,14 @@ end
 
 # Returns 1 if they are in the Bermuda bowl
 # Not used any more.
-def check_if_in_bermuda_bowl(name)
-  $bermuda_bowl_winners.each do |winner|
-    if (winner[:name] == name) then
-      return 1
-    end
-  end
-  return 0
-end
+#def check_if_in_bermuda_bowl(name)
+#  $bermuda_bowl_winners.each do |winner|
+#    if (winner[:name] == name) then
+#      return 1
+#    end
+#  end
+#  return 0
+#end
 
 # Generic routine to check if a player is listed in an award_winners array
 def check_if_in_award(award_winners, name)
@@ -338,12 +361,36 @@ def get_bermuda_bowl_data(player_name, position)
   get_year_position_data($bermuda_bowl_winners, player_name, position)
 end
 
+def get_buffett_cup_data(player_name, position)
+  get_year_position_data($buffett_cup_winners, player_name, position)
+end
+
+def get_venice_cup_data(player_name, position)
+  get_year_position_data($venice_cup_winners, player_name, position)
+end
+
+def get_dorsi_bowl_data(player_name, position)
+  get_year_position_data($dorsi_bowl_winners, player_name, position)
+end
+
+def get_transnational_teams_data(player_name, position)
+  get_year_position_data($transnational_teams_winners, player_name, position)
+end
+
+def get_rosenblum_data(player_name, position)
+  get_year_position_data($rosenblum_winners, player_name, position)
+end
+
 def get_world_mixed_pairs_data(player_name, position)
   get_year_position_data($world_mixed_pairs_winners, player_name, position)
 end
 
 def get_world_open_pairs_data(player_name, position)
   get_year_position_data($world_open_pairs_winners, player_name, position)
+end
+
+def get_world_senior_teams_data(player_name, position)
+  get_year_position_data($world_senior_teams_winners, player_name, position)
 end
 
 
@@ -446,7 +493,7 @@ end
 ## Main routine
 ########
 #
-Dir.mkdir("players")
+Dir.mkdir("players") unless File.directory?("players")
 player_db.each do |ph,pk|
 
 # We can speed it up by using the data in the 5winners or 10winners file
@@ -598,7 +645,35 @@ player_db.each do |ph,pk|
     # Check for Bermuda Bowl
     nentries, years_s = get_bermuda_bowl_data(ph, 1)
     if (nentries > 0) then
-      fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s}"
+      fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts ""
+    end
+
+    # Check for Venice Cup
+    nentries, years_s = get_venice_cup_data(ph, 1)
+    if (nentries > 0) then
+      fd.puts "* [[Venice Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts ""
+    end
+
+    # Check for d'Orsi Cup
+    nentries, years_s = get_dorsi_bowl_data(ph, 1)
+    if (nentries > 0) then
+      fd.puts "* [[Senior Bowl (bridge)|d'Orsi Senior Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts ""
+    end
+
+    # Check for Transnational Teams
+    nentries, years_s = get_transnational_teams_data(ph, 1)
+    if (nentries > 0) then
+      fd.puts "* [[World Transnational Open Teams Championship]] (#{nentries}) #{years_s} #{transnational_ref}"
+      fd.puts ""
+    end
+
+    # Check for Rosenblum
+    nentries, years_s = get_rosenblum_data(ph, 1)
+    if (nentries > 0) then
+      fd.puts "* [[Rosenblum Cup]] (#{nentries}) #{years_s} #{rosenblum_ref}"
       fd.puts ""
     end
 
@@ -613,6 +688,20 @@ player_db.each do |ph,pk|
     nentries, years_s = get_world_mixed_pairs_data(ph, 1)
     if (nentries > 0) then
       fd.puts "* [[World Mixed Pairs Championships]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World senior teams
+    nentries, years_s = get_world_senior_teams_data(ph, 1)
+    if (nentries > 0) then
+      fd.puts "* [[World Senior Teams Championships]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # Check for Buffett Cup Bowl
+    nentries, years_s = get_buffett_cup_data(ph, 1)
+    if (nentries > 0) then
+      fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
       fd.puts ""
     end
 
@@ -653,15 +742,42 @@ player_db.each do |ph,pk|
     fd.puts ""
     fd.puts "===Runners-up==="
     fd.puts ""
-    # Check for Bermuda Bowl
-#    if (check_if_in_bermuda_bowl(ph) == 1) then
-      nentries, years_s = get_bermuda_bowl_data(ph, 2)
 
-      if (nentries > 0) then
-        fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s}"
-        fd.puts ""
-      end
-#    end
+    # Check for Bermuda Bowl
+    nentries, years_s = get_bermuda_bowl_data(ph, 2)
+
+    if (nentries > 0) then
+      fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts ""
+    end
+
+    # Check for Venice Cup
+    nentries, years_s = get_venice_cup_data(ph, 2)
+    if (nentries > 0) then
+      fd.puts "* [[Venice Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts ""
+    end
+
+    # Check for d'Orsi Cup
+    nentries, years_s = get_dorsi_bowl_data(ph, 2)
+    if (nentries > 0) then
+      fd.puts "* [[Senior Bowl (bridge)|d'Orsi Senior Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts ""
+    end
+
+    # Check for Transnational Teams
+    nentries, years_s = get_transnational_teams_data(ph, 2)
+    if (nentries > 0) then
+      fd.puts "* [[World Transnational Open Teams Championship]] (#{nentries}) #{years_s} #{transnational_ref}"
+      fd.puts ""
+    end
+
+    # Check for Rosenblum
+    nentries, years_s = get_rosenblum_data(ph, 2)
+    if (nentries > 0) then
+      fd.puts "* [[Rosenblum Cup]] (#{nentries}) #{years_s} #{rosenblum_ref}"
+      fd.puts ""
+    end
 
     # World open pairs
     nentries, years_s = get_world_open_pairs_data(ph, 2)
@@ -673,6 +789,20 @@ player_db.each do |ph,pk|
     nentries, years_s = get_world_mixed_pairs_data(ph, 2)
     if (nentries > 0) then
       fd.puts "* [[World Mixed Pairs]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World senior teams
+    nentries, years_s = get_world_senior_teams_data(ph, 2)
+    if (nentries > 0) then
+      fd.puts "* [[World Senior Teams Championships]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # Check for Buffett Cup Bowl
+    nentries, years_s = get_buffett_cup_data(ph, 2)
+    if (nentries > 0) then
+      fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
       fd.puts ""
     end
 
@@ -727,7 +857,19 @@ player_db.each do |ph,pk|
     end
 
     # Need to get the WBF data
-    fd.puts "* {{WBFpeople|XXXX|#{ph}}}"
+    wbf_data = $wbf_ids_db[ph]
+    has_id = 0
+    if (!wbf_data.nil?) then
+      id = wbf_data[:id]
+      if ((!id.nil?) && (id.to_i > 0)) then
+      puts "ph=#{ph} wbf_data=#{wbf_data} id=#{id}"
+        has_id = 1
+      end
+    end
+
+    if (has_id == 1) then
+      fd.puts "* {{WBFpeople|#{id}|#{ph}}}"
+    end
     fd.puts "{{WPCBIndex}}"
     fd.puts ""
     fd.puts "{{Persondata <!-- Metadata: see [[Wikipedia:Persondata]]. -->"
