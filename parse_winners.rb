@@ -38,6 +38,20 @@ d1 = today.strftime("%Y-%m-%d")
 # | accessdate = #{d1} }}</ref>"
 #  end
 #fishbein_ref = "<
+#fishbein_ref = "<ref>{{cite news
+
+von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge von Zedtwitz Award]</ref>"
+blackwood_ref = "<ref>[http://www.fpabridge.org/blackwood.htm Foundation for the Preservation and Advancement of Bridge Blackwood Award]</ref>"
+# | title = "Fishbein"
+# | author = 
+# | publisher = American Contract Bridge League
+# | url = #{event[:url]}
+# | page = #{event[:page]}
+# | date = #{date}
+# | accessdate = #{d1} }}</ref>"
+#  end
+#fishbein_ref = "<
+
 
 # Read in events from events.csv , with xref
 event_data = File.read("events.csv")
@@ -122,6 +136,9 @@ $fishbein_winners = read_award_data("fishbein.csv")
 $goren_winners = read_award_data("goren.csv")
 $herman_winners = read_award_data("herman.csv")
 $mott_smith_winners = read_award_data("mott-smith.csv")
+# More HOF award
+$acbl_blackwood_winners = read_award_data("acbl_blackwood.csv")
+$acbl_zedtwitz_winners = read_award_data("acbl_zedtwitz.csv")
 
 # Returns 1 if contains first place.
 def is_first_place(string)
@@ -172,17 +189,21 @@ def check_if_has_award(name)
   in_goren = check_if_in_goren(name)
   in_herman = check_if_in_herman(name)
   in_mott_smith = check_if_in_mott_smith(name)
+  in_blackwood = check_if_in_blackwood(name)
+  in_zedtwitz = check_if_in_zedtwitz(name)
 
   if ((in_fishbein == 1) || 
       (in_acbl_kob == 1) || 
       (in_acbl_poy == 1) || 
+      (in_blackwood == 1) ||
+      (in_zedtwitz == 1) ||
       (in_goren == 1) || 
       (in_herman == 1) || 
       (in_mott_smith == 1)) then
     has_award = 1
   end
 
-  return has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith
+  return has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith, in_blackwood, in_zedtwitz
 end
 
 # Returns 1 if they are in the Bermuda bowl
@@ -234,6 +255,16 @@ end
 # Check if in Mott-Smith
 def check_if_in_mott_smith(name)
   check_if_in_award($mott_smith_winners, name)
+end
+
+# Check if in Blacwood
+def check_if_in_blackwood(name)
+  check_if_in_award($acbl_blackwood_winners, name)
+end
+
+# Check if in Zedtwitz
+def check_if_in_zedtwitz(name)
+  check_if_in_award($acbl_zedtwitz_winners, name)
 end
 
 # Returns a Wikipidea reference from the event file.
@@ -367,6 +398,14 @@ def get_mott_smith_data(player_name, position)
   get_award_data($mott_smith_winners, player_name, position)
 end
 
+def get_blackwood_data(player_name, position)
+  get_award_data($acbl_blackwood_winners, player_name, position)
+end
+
+def get_zedtwitz_data(player_name, position)
+  get_award_data($acbl_zedtwitz_winners, player_name, position)
+end
+
 # This is from the winners.csv file
 # Create an array for each line
 data.each_line do |csv_row|
@@ -406,6 +445,8 @@ end
 ########
 ## Main routine
 ########
+#
+Dir.mkdir("players")
 player_db.each do |ph,pk|
 
 # We can speed it up by using the data in the 5winners or 10winners file
@@ -457,7 +498,7 @@ player_db.each do |ph,pk|
     in_acbl_hof = in_acbl_hof.to_i
 
     # Check to see if they have an award
-    has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith = check_if_has_award(ph)
+    has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith, in_blackwood, in_zedtwitz = check_if_has_award(ph)
 
     # Handle names like John R. Crawford
     # Store name in first_names, last_name
@@ -539,6 +580,14 @@ player_db.each do |ph,pk|
       if (in_mott_smith == 1) then
         nentries, years_s = get_mott_smith_data(ph, 1)
         fd.puts "* [[Mott-Smith Trophy]] (#{nentries}) #{years_s}"
+      end
+      if (in_blackwood == 1) then
+        nentries, years_s = get_blackwood_data(ph, 1)
+        fd.puts "* Blackwood Award #{years_s} #{blackwood_ref}"
+      end
+      if (in_zedtwitz == 1) then
+        nentries, years_s = get_zedtwitz_data(ph, 1)
+        fd.puts "* von Zedtwitz Award #{years_s} #{von_zedtwitz_ref}"
       end
       fd.puts ""
     end
