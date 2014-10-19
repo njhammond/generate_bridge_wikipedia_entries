@@ -1,0 +1,9 @@
+To find a player, go to the directory that starts with the same letter as their _first_ anem.
+
+For example, to find "Bob Hamman" go to the B directory.
+
+GitHub imposes a limit of 1,000 files per directory so had to split up the files this way.
+
+Some players have multiple entries, see the alternative_names.csv file in the directory aboe this.
+
+The names of the files correspond to the name that is listed when they win an event, hence "Bob Hamman" and not "Robert Hamman".
