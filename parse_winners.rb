@@ -83,9 +83,11 @@ acbl_hof_data.each_line do |csv_row|
   year = fields[0]
   name = fields[1]
   ref = fields[2]
-  e = $acbl_hofs_db[name]
-  e[:year] = year
-  e[:ref] = ref
+  $acbl_hofs_db[name][:year] = year
+  $acbl_hofs_db[name][:ref] = ref
+#  e = $acbl_hofs_db[name]
+#  e[:year] = year
+#  e[:ref] = ref
 end
 
 # Read in mapping from player name to WBF ID
@@ -212,7 +214,8 @@ def is_second_place(string)
   1
 end
 
-# Returns 1 if they have an honor
+# Returns has_honor, in_acbl, hof entry  if they have an honor
+#
 def check_if_has_honor(name)
   # Are they in the ACBL HOF
   has_honor = 0
@@ -231,26 +234,30 @@ def check_if_has_honor(name)
   end
 
 #  puts "name=#{name} h=#{has_honor} hof=#{in_acbl_hof} e=#{e} "
-  return has_honor, in_acbl_hof
+  return has_honor, in_acbl_hof, e
 end
 
 def check_all_names_if_has_honor(name, has_alter_egos, alter_egos)
-  has_honor, in_acbl_hof = check_if_has_honor(name)
+  has_honor, in_acbl_hof, acbl_hof = check_if_has_honor(name)
   if (has_honor == 1) then
-    return has_honor, in_acbl_hof
+    return has_honor, in_acbl_hof, acbl_hof
   end
   if (has_alter_egos == 0) then
-    return has_honor, in_acbl_hof
+    return has_honor, in_acbl_hof, acbl_hof
   end
   i1 = has_honor
   i2 = in_acbl_hof
 
   alter_egos.each do |a_name|
-    j1, j2 = check_if_has_honor(a_name)
+    j1, j2, acbl_hof = check_if_has_honor(a_name)
     if (j1 == 1) then i1 = 1 end
     if (j2 == 1) then i2 = 1 end
+    if (i2 == 1) then
+      # Got a match, so return
+      return i1, i2, acbl_hof
+    end
   end
-  return i1, i2
+  return i1, i2, acbl_hof
 end
 
 # Returns 1 if they have an award
@@ -673,7 +680,7 @@ player_db.each do |ph,pk|
     end
 
     # Check to see if they have an honor
-    has_honor, in_acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
+    has_honor, in_acbl_hof, acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
     in_acbl_hof = in_acbl_hof.to_i
 
     # Check to see if they have an award
@@ -741,17 +748,20 @@ player_db.each do |ph,pk|
       fd.puts "#{last_name} has competed as #{a_names}."
     end
 
-    has_honor, in_acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
-    fd.puts ""
+#    has_honor, in_acbl_hof, acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
+#    fd.puts ""
 
     # Clear out the hof reference variable
     hof_ref = ""
 
     # Are they in the HOF?
     if (in_acbl_hof == 1) then
-      hof = $acbl_hofs_db[ph]
-      year = hof[:year]
-      ref = hof[:ref]
+      # Get the right HOF entry. Need to allow for other names
+      # For now, manually edit the HOF file...
+#      hof = $acbl_hofs_db[ph]
+#      puts "hof= #{hof}"
+      year = acbl_hof[:year]
+      ref = acbl_hof[:ref]
       # hof_ref is the Wikipedia citation
       hof_ref = get_hof_reference(ph, ref)
       fd.puts "#{last_name} was inducted into the [[American Contract Bridge League]]'s Hall of Fame in #{year}.#{hof_ref}"
@@ -771,8 +781,7 @@ player_db.each do |ph,pk|
       fd.puts ""
 
       if (in_acbl_hof == 1) then
-        hof = $acbl_hofs_db[ph]
-        fd.puts "* ACBL Hall of Fame #{hof[:year]} #{hof_ref}"
+        fd.puts "* ACBL Hall of Fame #{acbl_hof[:year]} #{hof_ref}"
       end
       fd.puts ""
     end
@@ -1103,8 +1112,7 @@ player_db.each do |ph,pk|
 
     # If they are in HOF, put it here
     if (in_acbl_hof == 1) then
-      hof = $acbl_hofs_db[ph]
-      fd.puts "* {{ACBLhof|#{hof[:ref]}}}"
+      fd.puts "* {{ACBLhof|#{acbl_hof[:ref]}}}"
     end
 
     # Need to get the WBF data
