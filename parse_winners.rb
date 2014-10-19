@@ -47,6 +47,7 @@ wbf_ref = "<ref>[http://www.worldbridge.org/world-team-championships.aspx World 
 transnational_ref = "<ref>[http://www.worldbridge.org/transnational-open-teams.aspx World Transational Open Teams Winners]</ref>"
 rosenblum_ref = "<ref>[http://www.worldbridge.org/world-open-teams.aspx Rosenblum Cup Winners]</ref>"
 world_senior_teams_ref = "<ref>[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
+buffett_ref = ""
 # | title = "Fishbein"
 # | author = 
 # | publisher = American Contract Bridge League
@@ -97,6 +98,32 @@ wbf_id_data.each_line do |csv_row|
   id = fields[1]
   e = $wbf_ids_db[name]
   e[:id] = id
+end
+
+# Read in countries
+player_country_data = File.read("player_country.csv")
+player_countrys = Array.new
+$player_countrys_db = Hash.new { |h, k| h[k] = Hash.new(0) }
+player_country_data.each_line do |csv_row|
+	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
+  name = fields[0]
+  country = fields[1]
+  e = $player_countrys_db[name]
+  e[:country] = country
+end
+
+# Read in alternative names
+alternative_names_data = File.read("alternative_names.csv")
+#alternative_names = Array.new
+# $alternative_names_db = Hash.new { |h, k| h[k] = Hash.new(0) }
+$alternative_names_db = Hash.new
+alternative_names_data.each_line do |csv_row|
+	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
+  name = fields[0]
+  primary = fields[1]
+  $alternative_names_db[name] = primary
+#  e = $alternative_names_db[name]
+#  e[:primary] = primary
 end
 
 # Data with positions.
@@ -202,18 +229,37 @@ def check_if_has_honor(name)
   return has_honor, in_acbl_hof
 end
 
+def check_all_names_if_has_honor(name, has_alter_egos, alter_egos)
+  has_honor, in_acbl_hof = check_if_has_honor(name)
+  if (has_honor == 1) then
+    return has_honor, in_acbl_hof
+  end
+  if (has_alter_egos == 0) then
+    return has_honor, in_acbl_hof
+  end
+  i1 = has_honor
+  i2 = in_acbl_hof
+
+  alter_egos.each do |a_name|
+    j1, j2 = check_if_has_honor(a_name)
+    if (j1 == 1) then i1 = 1 end
+    if (j2 == 1) then i2 = 1 end
+  end
+  return i1, i2
+end
+
 # Returns 1 if they have an award
-def check_if_has_award(name)
+def check_all_awards(name, has_alter_egos, alter_egos)
   # Are they in the ACBL HOF
   has_award = 0
-  in_acbl_kob = check_if_in_acbl_kob(name)
-  in_acbl_poy = check_if_in_acbl_poy(name)
-  in_fishbein = check_if_in_fishbein(name)
-  in_goren = check_if_in_goren(name)
-  in_herman = check_if_in_herman(name)
-  in_mott_smith = check_if_in_mott_smith(name)
-  in_blackwood = check_if_in_blackwood(name)
-  in_zedtwitz = check_if_in_zedtwitz(name)
+  in_acbl_kob = check_if_in_acbl_kob(name, has_alter_egos, alter_egos)
+  in_acbl_poy = check_if_in_acbl_poy(name, has_alter_egos, alter_egos)
+  in_fishbein = check_if_in_fishbein(name, has_alter_egos, alter_egos)
+  in_goren = check_if_in_goren(name, has_alter_egos, alter_egos)
+  in_herman = check_if_in_herman(name, has_alter_egos, alter_egos)
+  in_mott_smith = check_if_in_mott_smith(name, has_alter_egos, alter_egos)
+  in_blackwood = check_if_in_blackwood(name, has_alter_egos, alter_egos)
+  in_zedtwitz = check_if_in_zedtwitz(name, has_alter_egos, alter_egos)
 
   if ((in_fishbein == 1) || 
       (in_acbl_kob == 1) || 
@@ -229,6 +275,7 @@ def check_if_has_award(name)
   return has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith, in_blackwood, in_zedtwitz
 end
 
+
 # Returns 1 if they are in the Bermuda bowl
 # Not used any more.
 #def check_if_in_bermuda_bowl(name)
@@ -241,7 +288,7 @@ end
 #end
 
 # Generic routine to check if a player is listed in an award_winners array
-def check_if_in_award(award_winners, name)
+def check_if_has_award(award_winners, name)
   award_winners.each do |winner|
     if (winner[:name] == name) then
       return 1
@@ -250,44 +297,61 @@ def check_if_in_award(award_winners, name)
   return 0
 end
 
+def check_all_names_if_has_award(award_winners, name, has_alter_egos, alter_egos)
+  i1 = check_if_has_award(award_winners, name)
+  if (i1 == 1) then
+    return 1
+  end
+  if (has_alter_egos == 0) then
+    return 0
+  end
+  alter_egos.each do |a_name|
+    i1 = check_if_has_award(award_winners, a_name)
+    if (i1 == 1) then
+      return 1
+    end
+  end
+  return 0
+end
+
 # Check if in ACBL King of Bridge
-def check_if_in_acbl_kob(name)
-  check_if_in_award($acbl_kob_winners, name)
+def check_if_in_acbl_kob(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($acbl_kob_winners, name, has_alter_egos, alter_egos)
 end
 
 # Check if in ACBL player of year
-def check_if_in_acbl_poy(name)
-  check_if_in_award($acbl_poy_winners, name)
+def check_if_in_acbl_poy(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($acbl_poy_winners, name, has_alter_egos, alter_egos)
 end
 
 # Check if in Fishbein
-def check_if_in_fishbein(name)
-  check_if_in_award($fishbein_winners, name)
+def check_if_in_fishbein(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($fishbein_winners, name, has_alter_egos, alter_egos)
 end
 
 # Check if in Goren
-def check_if_in_goren(name)
-  check_if_in_award($goren_winners, name)
+def check_if_in_goren(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($goren_winners, name, has_alter_egos, alter_egos)
 end
 
 # Check if in Herman
-def check_if_in_herman(name)
-  check_if_in_award($herman_winners, name)
+def check_if_in_herman(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($herman_winners, name, has_alter_egos, alter_egos)
 end
 
 # Check if in Mott-Smith
-def check_if_in_mott_smith(name)
-  check_if_in_award($mott_smith_winners, name)
+def check_if_in_mott_smith(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($mott_smith_winners, name, has_alter_egos, alter_egos)
 end
 
 # Check if in Blacwood
-def check_if_in_blackwood(name)
-  check_if_in_award($acbl_blackwood_winners, name)
+def check_if_in_blackwood(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($acbl_blackwood_winners, name, has_alter_egos, alter_egos)
 end
 
 # Check if in Zedtwitz
-def check_if_in_zedtwitz(name)
-  check_if_in_award($acbl_zedtwitz_winners, name)
+def check_if_in_zedtwitz(name, has_alter_egos, alter_egos)
+  check_all_names_if_has_award($acbl_zedtwitz_winners, name, has_alter_egos, alter_egos)
 end
 
 # Returns a Wikipidea reference from the event file.
@@ -330,13 +394,14 @@ end
 
 # Returns the year/position data for a player
 # returns nentries, years (in string format)
-def get_year_position_data(winners, player_name, position)
+def get_year_position_data(winners, player_name, position, has_alter_egos, alter_egos)
   nentries = 0
   i_position = position.to_i
   years = Array.new
 
   winners.each do |winner|
-    if (winner[:name] == player_name) then
+    if (player_name_match(player_name, winner[:name], has_alter_egos, alter_egos) == 1) then
+#    if (winner[:name] == player_name) then
       if (winner[:position].to_i == i_position) then
         nentries = nentries + 1
         years << winner[:year].to_i
@@ -357,52 +422,53 @@ end
 
 # Returns the bermuda bowl data for a player
 # returns nentries, years (in string)
-def get_bermuda_bowl_data(player_name, position)
-  get_year_position_data($bermuda_bowl_winners, player_name, position)
+def get_bermuda_bowl_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($bermuda_bowl_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_buffett_cup_data(player_name, position)
-  get_year_position_data($buffett_cup_winners, player_name, position)
+def get_buffett_cup_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($buffett_cup_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_venice_cup_data(player_name, position)
-  get_year_position_data($venice_cup_winners, player_name, position)
+def get_venice_cup_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($venice_cup_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_dorsi_bowl_data(player_name, position)
-  get_year_position_data($dorsi_bowl_winners, player_name, position)
+def get_dorsi_bowl_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($dorsi_bowl_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_transnational_teams_data(player_name, position)
-  get_year_position_data($transnational_teams_winners, player_name, position)
+def get_transnational_teams_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($transnational_teams_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_rosenblum_data(player_name, position)
-  get_year_position_data($rosenblum_winners, player_name, position)
+def get_rosenblum_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($rosenblum_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_world_mixed_pairs_data(player_name, position)
-  get_year_position_data($world_mixed_pairs_winners, player_name, position)
+def get_world_mixed_pairs_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_mixed_pairs_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_world_open_pairs_data(player_name, position)
-  get_year_position_data($world_open_pairs_winners, player_name, position)
+def get_world_open_pairs_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_open_pairs_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_world_senior_teams_data(player_name, position)
-  get_year_position_data($world_senior_teams_winners, player_name, position)
+def get_world_senior_teams_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_senior_teams_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
 
 # Returns the bermuda bowl data for a player
 # returns nentries, years (in string)
-def get_award_data(award_data, player_name, position)
+def get_award_data(award_data, player_name, position, has_alter_egos, alter_egos)
   nentries = 0
   i_position = position.to_i
   years = Array.new
 
   award_data.each do |winner|
-    if (winner[:name] == player_name) then
+    if (player_name_match(player_name, winner[:name], has_alter_egos, alter_egos) == 1) then
+#    if (winner[:name] == player_name) then
       nentries = nentries + 1
       years << winner[:year].to_i
     end
@@ -421,36 +487,36 @@ def get_award_data(award_data, player_name, position)
 end
 
 # returns nentries, years (in string)
-def get_acbl_kob_data(player_name, position)
-  get_award_data($acbl_kob_winners, player_name, position)
+def get_acbl_kob_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($acbl_kob_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
-def get_acbl_poy_data(player_name, position)
-  get_award_data($acbl_poy_winners, player_name, position)
+def get_acbl_poy_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($acbl_poy_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
-def get_fishbein_data(player_name, position)
-  get_award_data($fishbein_winners, player_name, position)
+def get_fishbein_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($fishbein_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
-def get_goren_data(player_name, position)
-  get_award_data($goren_winners, player_name, position)
+def get_goren_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($goren_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
-def get_herman_data(player_name, position)
-  get_award_data($herman_winners, player_name, position)
+def get_herman_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($herman_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
-def get_mott_smith_data(player_name, position)
-  get_award_data($mott_smith_winners, player_name, position)
+def get_mott_smith_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($mott_smith_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
-def get_blackwood_data(player_name, position)
-  get_award_data($acbl_blackwood_winners, player_name, position)
+def get_blackwood_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($acbl_blackwood_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
-def get_zedtwitz_data(player_name, position)
-  get_award_data($acbl_zedtwitz_winners, player_name, position)
+def get_zedtwitz_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($acbl_zedtwitz_winners, player_name, position, has_alter_egos, alter_egos)
 end
 
 # This is from the winners.csv file
@@ -489,6 +555,36 @@ data.each_line do |csv_row|
   }
 end
 
+# Returns 1 if this has has alternative names
+def check_if_has_alternative_names(name)
+  alter_egos = Array.new
+  $alternative_names_db.each do |h,k|
+    if k == name then
+      alter_egos << h
+    end
+  end
+  return alter_egos
+end
+
+
+# Returns 1 if there is a match
+def player_name_match(player_name, name_to_test, has_alter_egos, alter_egos)
+#  puts "Player name match: #{player_name} #{name_to_test} has=#{has_alter_egos}"
+  if (player_name == name_to_test) then
+    return 1
+  end
+  if (has_alter_egos == 0) then
+    return 0
+  end
+  alter_egos.each do |name|
+#  puts "Player name match: checking alters player_name=#{player_name} name=#{name} Z"
+    if (name_to_test == name) then
+      return 1
+    end
+  end
+  return 0
+end
+
 ########
 ## Main routine
 ########
@@ -504,8 +600,18 @@ player_db.each do |ph,pk|
 #  ph.chomp!
 #  puts "Player_db #{h} = #{k} "
 
+  player_name = ph
   # If this is a blank line, slip
   next if (ph.size <= 1)
+
+
+  alter_egos = check_if_has_alternative_names(player_name)
+  has_alter_egos = (alter_egos.size == 0) ? 0 : 1
+
+#  puts "ALLL"
+#  alter_egos.each do |a_name|
+#    puts "alter = #{a_name}"
+#  end
 
   # Filename to be created
   file_name = "players/" + ph.to_s
@@ -516,8 +622,9 @@ player_db.each do |ph,pk|
     nnabc_seconds = 0
     win_events = Hash.new
     winners.each do |w|
+      if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
      # Count first place only
-      if (ph == w[:player]) then
+#      if (ph == w[:player]) then
         if (is_first_place(w[:place]) == 1) then
           nnabc_wins = nnabc_wins + 1
           event_name = w[:event_name]
@@ -541,11 +648,12 @@ player_db.each do |ph,pk|
     end
 
     # Check to see if they have an honor
-    has_honor, in_acbl_hof = check_if_has_honor(ph)
+    has_honor, in_acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
     in_acbl_hof = in_acbl_hof.to_i
 
     # Check to see if they have an award
-    has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith, in_blackwood, in_zedtwitz = check_if_has_award(ph)
+#    has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith, in_blackwood, in_zedtwitz = check_all_names_if_has_award(ph, has_alter_egos, alter_egos)
+    has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith, in_blackwood, in_zedtwitz = check_all_awards(ph, has_alter_egos, alter_egos)
 
     # Handle names like John R. Crawford
     # Store name in first_names, last_name
@@ -561,8 +669,54 @@ player_db.each do |ph,pk|
 
     # Header
     # We always put American, but may not be. Need to manually edit if not
-    fd.puts "'''#{ph}''' is an [[United States|American]] [[Contract bridge|bridge]] player."
+    player_data = $player_countrys_db[ph]
+    has_country = 0
+    country = ""
+    if (!player_data.nil?) then
+      country = player_data[:country]
+      if (!country.nil?) then
+        if (country != "0") then
+#      puts "ph=#{ph} country=#{country}"
+        has_country = 1
+        end
+      end
+    end
+    country_ref = "is an [[United States|American]]"
+    short_description = "American contract bridge player"
+    wiki_category = "[[Category:American bridge players]]"
+    if (has_country == 1) then
+      case country
+      when "CAN"
+        country_ref = "is a [[Canadian|Canadian]]"
+        short_description = "Canadian contract bridge player"
+        wiki_category = "[[Category:Canadian bridge players]]"
+      when "FRA"
+        country_ref = "is a [[France|French]]"
+        short_description = "French contract bridge player"
+        wiki_category = "[[Category:French bridge players]]"
+      when "ITA"
+        country_ref = "is an [[Italy|Italian]]"
+        short_description = "Italian contract bridge player"
+        wiki_category = "[[Category:Italian bridge players]]"
+      when "MCO"
+        country_ref = "is a [[Monaco|Monagesque]]"
+        short_description = "Monagesque contract bridge player"
+        wiki_category = "[[Category:Monagesque bridge players]]"
+      when "POL"
+        country_ref = "is a [[Poland|Polish]]"
+        short_description = "Polish contract bridge player"
+        wiki_category = "[[Category:Polish bridge players]]"
+      end
+    end
 
+    fd.puts "'''#{ph}''' #{country_ref} [[Contract bridge|bridge]] player."
+
+    if (alter_egos.size > 0) then
+      a_names = alter_egos.join(", ")
+      fd.puts "#{last_name} has competed as #{a_names}."
+    end
+
+    has_honor, in_acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
     fd.puts ""
 
     # Clear out the hof reference variable
@@ -604,36 +758,36 @@ player_db.each do |ph,pk|
       fd.puts ""
 
       if (in_acbl_kob == 1) then
-        nentries, years_s = get_acbl_kob_data(ph, 1)
+        nentries, years_s = get_acbl_kob_data(ph, 1, has_alter_egos, alter_egos)
         # Can only win it once
         fd.puts "* [[ACBL King or Queen of Bridge]] #{years_s}"
       end
       if (in_acbl_poy == 1) then
-        nentries, years_s = get_acbl_poy_data(ph, 1)
+        nentries, years_s = get_acbl_poy_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* ACBL Player of the Year (#{nentries}) #{years_s}"
       end
       if (in_fishbein == 1) then
-        nentries, years_s = get_fishbein_data(ph, 1)
+        nentries, years_s = get_fishbein_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* [[Fishbein Trophy]] (#{nentries}) #{years_s}"
       end
       if (in_goren == 1) then
-        nentries, years_s = get_goren_data(ph, 1)
+        nentries, years_s = get_goren_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* [[Goren Trophy]] (#{nentries}) #{years_s}"
       end
       if (in_herman == 1) then
-        nentries, years_s = get_herman_data(ph, 1)
+        nentries, years_s = get_herman_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* [[Herman Trophy]] (#{nentries}) #{years_s}"
       end
       if (in_mott_smith == 1) then
-        nentries, years_s = get_mott_smith_data(ph, 1)
+        nentries, years_s = get_mott_smith_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* [[Mott-Smith Trophy]] (#{nentries}) #{years_s}"
       end
       if (in_blackwood == 1) then
-        nentries, years_s = get_blackwood_data(ph, 1)
+        nentries, years_s = get_blackwood_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* Blackwood Award #{years_s} #{blackwood_ref}"
       end
       if (in_zedtwitz == 1) then
-        nentries, years_s = get_zedtwitz_data(ph, 1)
+        nentries, years_s = get_zedtwitz_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* von Zedtwitz Award #{years_s} #{von_zedtwitz_ref}"
       end
       fd.puts ""
@@ -643,65 +797,65 @@ player_db.each do |ph,pk|
     fd.puts ""
 
     # Check for Bermuda Bowl
-    nentries, years_s = get_bermuda_bowl_data(ph, 1)
+    nentries, years_s = get_bermuda_bowl_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
       fd.puts ""
     end
 
     # Check for Venice Cup
-    nentries, years_s = get_venice_cup_data(ph, 1)
+    nentries, years_s = get_venice_cup_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Venice Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
       fd.puts ""
     end
 
     # Check for d'Orsi Cup
-    nentries, years_s = get_dorsi_bowl_data(ph, 1)
+    nentries, years_s = get_dorsi_bowl_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Senior Bowl (bridge)|d'Orsi Senior Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
       fd.puts ""
     end
 
     # Check for Transnational Teams
-    nentries, years_s = get_transnational_teams_data(ph, 1)
+    nentries, years_s = get_transnational_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Transnational Open Teams Championship]] (#{nentries}) #{years_s} #{transnational_ref}"
       fd.puts ""
     end
 
     # Check for Rosenblum
-    nentries, years_s = get_rosenblum_data(ph, 1)
+    nentries, years_s = get_rosenblum_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Rosenblum Cup]] (#{nentries}) #{years_s} #{rosenblum_ref}"
       fd.puts ""
     end
 
     # World open pairs
-    nentries, years_s = get_world_open_pairs_data(ph, 1)
+    nentries, years_s = get_world_open_pairs_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[World Open Pairs Championships]] (#{nentries}) #{years_s}"
+      fd.puts "* [[World Open Pairs Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
     # World mixed pairs
-    nentries, years_s = get_world_mixed_pairs_data(ph, 1)
+    nentries, years_s = get_world_mixed_pairs_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[World Mixed Pairs Championships]] (#{nentries}) #{years_s}"
+      fd.puts "* [[World Mixed Pairs Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
     # World senior teams
-    nentries, years_s = get_world_senior_teams_data(ph, 1)
+    nentries, years_s = get_world_senior_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[World Senior Teams Championships]] (#{nentries}) #{years_s}"
+      fd.puts "* [[World Senior Teams Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
     # Check for Buffett Cup Bowl
-    nentries, years_s = get_buffett_cup_data(ph, 1)
+    nentries, years_s = get_buffett_cup_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{buffett_ref}"
       fd.puts ""
     end
 
@@ -712,7 +866,8 @@ player_db.each do |ph,pk|
         years = Array.new
         winners.each do |w|
         # Print their first place
-          if (ph == w[:player]) then
+          if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
+#          if (ph == w[:player]) then
             if (is_first_place(w[:place]) == 1) then
               if (h == w[:event_name]) then
                 years << w[:year].to_i
@@ -744,7 +899,7 @@ player_db.each do |ph,pk|
     fd.puts ""
 
     # Check for Bermuda Bowl
-    nentries, years_s = get_bermuda_bowl_data(ph, 2)
+    nentries, years_s = get_bermuda_bowl_data(ph, 2, has_alter_egos, alter_egos)
 
     if (nentries > 0) then
       fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
@@ -752,57 +907,57 @@ player_db.each do |ph,pk|
     end
 
     # Check for Venice Cup
-    nentries, years_s = get_venice_cup_data(ph, 2)
+    nentries, years_s = get_venice_cup_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Venice Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
       fd.puts ""
     end
 
     # Check for d'Orsi Cup
-    nentries, years_s = get_dorsi_bowl_data(ph, 2)
+    nentries, years_s = get_dorsi_bowl_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Senior Bowl (bridge)|d'Orsi Senior Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
       fd.puts ""
     end
 
     # Check for Transnational Teams
-    nentries, years_s = get_transnational_teams_data(ph, 2)
+    nentries, years_s = get_transnational_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Transnational Open Teams Championship]] (#{nentries}) #{years_s} #{transnational_ref}"
       fd.puts ""
     end
 
     # Check for Rosenblum
-    nentries, years_s = get_rosenblum_data(ph, 2)
+    nentries, years_s = get_rosenblum_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Rosenblum Cup]] (#{nentries}) #{years_s} #{rosenblum_ref}"
       fd.puts ""
     end
 
     # World open pairs
-    nentries, years_s = get_world_open_pairs_data(ph, 2)
+    nentries, years_s = get_world_open_pairs_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[World Open Pairs]] (#{nentries}) #{years_s}"
+      fd.puts "* [[World Open Pairs Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
-    nentries, years_s = get_world_mixed_pairs_data(ph, 2)
+    nentries, years_s = get_world_mixed_pairs_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[World Mixed Pairs]] (#{nentries}) #{years_s}"
+      fd.puts "* [[World Mixed Pairs Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
     # World senior teams
-    nentries, years_s = get_world_senior_teams_data(ph, 2)
+    nentries, years_s = get_world_senior_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[World Senior Teams Championships]] (#{nentries}) #{years_s}"
+      fd.puts "* [[World Senior Teams Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
     # Check for Buffett Cup Bowl
-    nentries, years_s = get_buffett_cup_data(ph, 2)
+    nentries, years_s = get_buffett_cup_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
-      fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
+      fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{buffett_ref}"
       fd.puts ""
     end
 
@@ -812,7 +967,7 @@ player_db.each do |ph,pk|
       win_events = Hash.new
       winners.each do |w|
        # Print their second + higher place
-        if ph == w[:player] then
+        if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
           if is_second_place(w[:place]) == 1 then
             event_name = w[:event_name]
             win_events[event_name] = 1
@@ -824,7 +979,9 @@ player_db.each do |ph,pk|
         years = Array.new
         winners.each do |w|
         # Print their second place
-          if ph == w[:player] then
+          if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
+#          if ph == w[:player] then
+#            end
             if is_second_place(w[:place]) == 1 then
               if (h == w[:event_name]) then
                 years << w[:year].to_i
@@ -841,7 +998,6 @@ player_db.each do |ph,pk|
         fd.puts "** #{event_name} (#{years.count}) #{years_s} #{ref}"
       end
     end
-
 
     # Trailer
     fd.puts ""
@@ -862,7 +1018,7 @@ player_db.each do |ph,pk|
     if (!wbf_data.nil?) then
       id = wbf_data[:id]
       if ((!id.nil?) && (id.to_i > 0)) then
-      puts "ph=#{ph} wbf_data=#{wbf_data} id=#{id}"
+#      puts "ph=#{ph} wbf_data=#{wbf_data} id=#{id}"
         has_id = 1
       end
     end
@@ -874,15 +1030,16 @@ player_db.each do |ph,pk|
     fd.puts ""
     fd.puts "{{Persondata <!-- Metadata: see [[Wikipedia:Persondata]]. -->"
     fd.puts "| NAME              = #{last_name}, #{first_names}"
-    fd.puts "| ALTERNATIVE NAMES ="
-    fd.puts "| SHORT DESCRIPTION = American contract bridge player"
+    a_names = alter_egos.join(", ")
+    fd.puts "| ALTERNATIVE NAMES = #{a_names}"
+    fd.puts "| SHORT DESCRIPTION = #{short_description}"
     fd.puts "| DATE OF BIRTH     ="
     fd.puts "| PLACE OF BIRTH    ="
     fd.puts "| DATE OF DEATH     ="
     fd.puts "| PLACE OF DEATH    ="
     fd.puts "}}"
     fd.puts "{{DEFAULTSORT:#{last_name}, #{first_names}}}"
-    fd.puts "[[Category:American bridge players]]"
+    fd.puts "#{wiki_category}"
     fd.puts ""
     fd.puts "{{Bridge-game-stub}}"
   end

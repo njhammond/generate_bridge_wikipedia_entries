@@ -9,3 +9,4 @@ do
 	wget -O "players/$file" "http://en.wikipedia.org/wiki/$file"  >"players/${file}.out" 2>"players/$file.err"
 done
 
+
