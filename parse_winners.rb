@@ -174,8 +174,13 @@ $transnational_teams_winners = read_year_position_name("transnational_teams.csv"
 $rosenblum_winners = read_year_position_name("rosenblum.csv")
 # World events
 $world_open_pairs_winners = read_year_position_name("world_open_pairs.csv")
+$world_women_pairs_winners = read_year_position_name("world_women_pairs.csv")
 $world_mixed_pairs_winners = read_year_position_name("world_mixed_pairs.csv")
+$world_senior_pairs_winners = read_year_position_name("world_senior_pairs.csv")
 $world_senior_teams_winners = read_year_position_name("world_senior_teams.csv")
+$world_olympiad_senior_teams_winners = read_year_position_name("world_olympiad_senior_teams.csv")
+$world_olympiad_teams_winners = read_year_position_name("world_olympiad_teams.csv")
+$world_olympiad_womens_teams_winners = read_year_position_name("world_olympiad_womens_teams.csv")
 
 # ACBL King of Bridge (handles queen as well)
 $acbl_kob_winners = read_award_data("acbl_kob.csv")
@@ -446,16 +451,36 @@ def get_rosenblum_data(player_name, position, has_alter_ego, alter_egos)
   get_year_position_data($rosenblum_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
-def get_world_mixed_pairs_data(player_name, position, has_alter_ego, alter_egos)
-  get_year_position_data($world_mixed_pairs_winners, player_name, position, has_alter_ego, alter_egos)
-end
-
 def get_world_open_pairs_data(player_name, position, has_alter_ego, alter_egos)
   get_year_position_data($world_open_pairs_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
+def get_world_mixed_pairs_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_mixed_pairs_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
+def get_world_women_pairs_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_women_pairs_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
+def get_world_senior_pairs_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_senior_pairs_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
 def get_world_senior_teams_data(player_name, position, has_alter_ego, alter_egos)
   get_year_position_data($world_senior_teams_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
+def get_world_olympiad_teams_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_olympiad_teams_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
+def get_world_olympiad_senior_teams_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_olympiad_senior_teams_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
+def get_world_olympiad_womens_teams_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_olympiad_womens_teams_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
 
@@ -845,10 +870,45 @@ player_db.each do |ph,pk|
       fd.puts ""
     end
 
+    # World senior pairs
+    nentries, years_s = get_world_senior_pairs_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Senior Pairs Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World women pairs
+    nentries, years_s = get_world_women_pairs_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Women Pairs Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
     # World senior teams
     nentries, years_s = get_world_senior_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Senior Teams Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World olympiad
+    nentries, years_s = get_world_olympiad_teams_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Team Olympiad|World Olympiad Teams Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World olympiad
+    nentries, years_s = get_world_olympiad_senior_teams_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Team Olympiad|World Olympiad Seniors Teams Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World olympiad
+    nentries, years_s = get_world_olympiad_womens_teams_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Team Olympiad|World Olympiad Womens Teams Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
@@ -947,10 +1007,45 @@ player_db.each do |ph,pk|
       fd.puts ""
     end
 
+    # World senior pairs
+    nentries, years_s = get_world_senior_pairs_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Senior Pairs Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World women pairs
+    nentries, years_s = get_world_women_pairs_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Women Pairs Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
     # World senior teams
     nentries, years_s = get_world_senior_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Senior Teams Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World olympiad
+    nentries, years_s = get_world_olympiad_teams_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Team Olympiad|World Olympiad Teams Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World olympiad
+    nentries, years_s = get_world_olympiad_senior_teams_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Team Olympiad|World Olympiad Seniors Teams Championship]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # World olympiad
+    nentries, years_s = get_world_olympiad_womens_teams_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[World Team Olympiad|World Olympiad Womens Teams Championship]] (#{nentries}) #{years_s}"
       fd.puts ""
     end
 
@@ -962,7 +1057,7 @@ player_db.each do |ph,pk|
     end
 
     if (nnabc_seconds > 0) then
-      fd.puts "* [[North American Bridge Championships]]"
+      fd.puts "* [[North American Bridge Championships]] (#{nnabc_seconds})"
 
       win_events = Hash.new
       winners.each do |w|
