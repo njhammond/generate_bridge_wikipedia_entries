@@ -41,13 +41,14 @@ d1 = today.strftime("%Y-%m-%d")
 #fishbein_ref = "<
 #fishbein_ref = "<ref>{{cite news
 
-von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge - von Zedtwitz Award]</ref>"
+acbl_honorary_members_ref = "<ref>[http://www.acbl.org/about-acbl/honorary-members/ ACBL Honorary Members]</ref>"
 blackwood_ref = "<ref>[http://www.fpabridge.org/blackwood.htm Foundation for the Preservation and Advancement of Bridge - Blackwood Award]</ref>"
-wbf_ref = "<ref>[http://www.worldbridge.org/world-team-championships.aspx World Team Championship Winners]</ref>"
-transnational_ref = "<ref>[http://www.worldbridge.org/transnational-open-teams.aspx World Transational Open Teams Winners]</ref>"
-rosenblum_ref = "<ref>[http://www.worldbridge.org/world-open-teams.aspx Rosenblum Cup Winners]</ref>"
-world_senior_teams_ref = "<ref>[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
 buffett_ref = ""
+rosenblum_ref = "<ref>[http://www.worldbridge.org/world-open-teams.aspx Rosenblum Cup Winners]</ref>"
+transnational_ref = "<ref>[http://www.worldbridge.org/transnational-open-teams.aspx World Transational Open Teams Winners]</ref>"
+von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge - von Zedtwitz Award]</ref>"
+wbf_ref = "<ref>[http://www.worldbridge.org/world-team-championships.aspx World Team Championship Winners]</ref>"
+world_senior_teams_ref = "<ref>[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
 # | title = "Fishbein"
 # | author = 
 # | publisher = American Contract Bridge League
@@ -131,13 +132,11 @@ end
 # Data with positions.
 # Generic routine to read a CSV file that has format
 # Year,Position,Name
-
 def read_year_position_name(file_name)
   data = File.read(file_name)
   winners = Array.new
   data.each_line do |csv_row|
 	  fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
-
     year = fields[0]
     position = fields[1]
     name = fields[2]
@@ -152,7 +151,7 @@ end
 
 # Generic routine to read a CSV file that has format
 # Year,Name
-def read_award_data(file)
+def read_year_name(file)
   data = File.read(file)
   winners = Array.new
   data.each_line do |csv_row|
@@ -187,18 +186,20 @@ $world_olympiad_womens_teams_winners = read_year_position_name("world_olympiad_w
 # Other events
 $cavendish_pairs_winners = read_year_position_name("cavendish_pairs.csv")
 
+# Honorary
+$acbl_honorary_members_winners = read_year_name("acbl_honorary_members.csv")
 # ACBL King of Bridge (handles queen as well)
-$acbl_kob_winners = read_award_data("acbl_kob.csv")
+$acbl_kob_winners = read_year_name("acbl_kob.csv")
 # ACBL Player of the Year
-$acbl_poy_winners = read_award_data("acbl_poy.csv")
+$acbl_poy_winners = read_year_name("acbl_poy.csv")
 # Different winners
-$fishbein_winners = read_award_data("fishbein.csv")
-$goren_winners = read_award_data("goren.csv")
-$herman_winners = read_award_data("herman.csv")
-$mott_smith_winners = read_award_data("mott-smith.csv")
+$fishbein_winners = read_year_name("fishbein.csv")
+$goren_winners = read_year_name("goren.csv")
+$herman_winners = read_year_name("herman.csv")
+$mott_smith_winners = read_year_name("mott-smith.csv")
 # More HOF award
-$acbl_blackwood_winners = read_award_data("acbl_blackwood.csv")
-$acbl_zedtwitz_winners = read_award_data("acbl_zedtwitz.csv")
+$acbl_blackwood_winners = read_year_name("acbl_blackwood.csv")
+$acbl_zedtwitz_winners = read_year_name("acbl_zedtwitz.csv")
 
 # Returns 1 if contains first place.
 def is_first_place(string)
@@ -223,6 +224,7 @@ def check_if_has_honor(name)
   # Are they in the ACBL HOF
   has_honor = 0
   in_acbl_hof = 0
+#  in_acbl_honorary_members = 0
   e = $acbl_hofs_db[name]
 
   if (!e.nil?) then
@@ -236,31 +238,36 @@ def check_if_has_honor(name)
     end
   end
 
+  in_acbl_honorary_members = check_if_has_award($acbl_honorary_members_winners, name)
+  # Check honorary members XX
+
 #  puts "name=#{name} h=#{has_honor} hof=#{in_acbl_hof} e=#{e} "
-  return has_honor, in_acbl_hof, e
+  return has_honor, in_acbl_hof, in_acbl_honorary_members, e
 end
 
 def check_all_names_if_has_honor(name, has_alter_egos, alter_egos)
-  has_honor, in_acbl_hof, acbl_hof = check_if_has_honor(name)
+  has_honor, in_acbl_hof, in_acbl_honorary_members, acbl_hof = check_if_has_honor(name)
   if (has_honor == 1) then
-    return has_honor, in_acbl_hof, acbl_hof
+    return has_honor, in_acbl_hof, in_acbl_honorary_members, acbl_hof
   end
   if (has_alter_egos == 0) then
-    return has_honor, in_acbl_hof, acbl_hof
+    return has_honor, in_acbl_hof, in_acbl_honorary_members, acbl_hof
   end
   i1 = has_honor
   i2 = in_acbl_hof
+  i3 = in_acbl_honorary_members
 
   alter_egos.each do |a_name|
-    j1, j2, acbl_hof = check_if_has_honor(a_name)
+    j1, j2, j3, acbl_hof = check_if_has_honor(a_name)
     if (j1 == 1) then i1 = 1 end
     if (j2 == 1) then i2 = 1 end
+    if (j3 == 1) then i3 = 1 end
     if (i2 == 1) then
       # Got a match, so return
-      return i1, i2, acbl_hof
+      return i1, i2, i3, acbl_hof
     end
   end
-  return i1, i2, acbl_hof
+  return i1, i2, i3, acbl_hof
 end
 
 # Returns 1 if they have an award
@@ -327,6 +334,12 @@ def check_all_names_if_has_award(award_winners, name, has_alter_egos, alter_egos
     end
   end
   return 0
+end
+
+# Check if in ACBL Honorary
+def check_if_in_acbl_honorary_members(name, has_alter_egos, alter_egos)
+  # Does not check for alternative names
+  check_if_has_award($acbl_honorary_members_winners, name)
 end
 
 # Check if in ACBL King of Bridge
@@ -525,6 +538,10 @@ def get_award_data(award_data, player_name, position, has_alter_egos, alter_egos
 end
 
 # returns nentries, years (in string)
+def get_acbl_honorary_members_data(player_name, position, has_alter_egos, alter_egos)
+  get_award_data($acbl_honorary_members_winners, player_name, position, has_alter_egos, alter_egos)
+end
+
 def get_acbl_kob_data(player_name, position, has_alter_egos, alter_egos)
   get_award_data($acbl_kob_winners, player_name, position, has_alter_egos, alter_egos)
 end
@@ -686,7 +703,7 @@ player_db.each do |ph,pk|
     end
 
     # Check to see if they have an honor
-    has_honor, in_acbl_hof, acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
+    has_honor, in_acbl_hof, in_acbl_honorary_members, acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
     in_acbl_hof = in_acbl_hof.to_i
 
     # Check to see if they have an award
@@ -788,6 +805,9 @@ player_db.each do |ph,pk|
 
       if (in_acbl_hof == 1) then
         fd.puts "* ACBL Hall of Fame #{acbl_hof[:year]} #{hof_ref}"
+      end
+      if (in_acbl_honorary_members == 1) then
+        fd.puts "* ACBL Honorary Member #{acbl_hof[:year]} #{acbl_honorary_members_ref}"
       end
       fd.puts ""
     end
