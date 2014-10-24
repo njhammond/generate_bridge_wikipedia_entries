@@ -239,9 +239,12 @@ def check_if_has_honor(name)
   end
 
   in_acbl_honorary_members = check_if_has_award($acbl_honorary_members_winners, name)
+  if (in_acbl_honorary_members == 1) then
+    has_honor = 1
+  end
   # Check honorary members XX
 
-#  puts "name=#{name} h=#{has_honor} hof=#{in_acbl_hof} e=#{e} "
+  puts "name=#{name} h=#{has_honor} hof=#{in_acbl_hof} in_acbl_honorary_members=#{in_acbl_honorary_members} e=#{e} "
   return has_honor, in_acbl_hof, in_acbl_honorary_members, e
 end
 
@@ -308,6 +311,16 @@ end
 #  end
 #  return 0
 #end
+
+# Return the member in an award
+def return_member(award_winners, name)
+  award_winners.each do |winner|
+    if (winner[:name] == name) then
+      return winner
+    end
+  end
+  return nil
+end
 
 # Generic routine to check if a player is listed in an award_winners array
 def check_if_has_award(award_winners, name)
@@ -537,6 +550,10 @@ def get_award_data(award_data, player_name, position, has_alter_egos, alter_egos
   return nentries, years_s
 end
 
+def get_acbl_honorary_member(player_name)
+  return_member($acbl_honorary_members_winners, player_name)
+end
+
 # returns nentries, years (in string)
 def get_acbl_honorary_members_data(player_name, position, has_alter_egos, alter_egos)
   get_award_data($acbl_honorary_members_winners, player_name, position, has_alter_egos, alter_egos)
@@ -705,6 +722,7 @@ player_db.each do |ph,pk|
     # Check to see if they have an honor
     has_honor, in_acbl_hof, in_acbl_honorary_members, acbl_hof = check_all_names_if_has_honor(ph, has_alter_egos, alter_egos)
     in_acbl_hof = in_acbl_hof.to_i
+    in_acbl_honorary_members = in_acbl_honorary_members.to_i
 
     # Check to see if they have an award
 #    has_award, in_acbl_kob, in_acbl_poy, in_fishbein, in_goren, in_herman, in_mott_smith, in_blackwood, in_zedtwitz = check_all_names_if_has_award(ph, has_alter_egos, alter_egos)
@@ -807,7 +825,8 @@ player_db.each do |ph,pk|
         fd.puts "* ACBL Hall of Fame #{acbl_hof[:year]} #{hof_ref}"
       end
       if (in_acbl_honorary_members == 1) then
-        fd.puts "* ACBL Honorary Member #{acbl_hof[:year]} #{acbl_honorary_members_ref}"
+        acbl_honorary_member = get_acbl_honorary_member(ph)
+        fd.puts "* ACBL Honorary Member #{acbl_honorary_member[:year]} #{acbl_honorary_members_ref}"
       end
       fd.puts ""
     end

@@ -7,6 +7,7 @@
 # Note: This will NOT handle disambiguation very well, i.e. names which are common
 # and may have other Wikipedia entries, e.g. Charles Coon who is a Bridge player
 # but there are already 2 Charles Coon entries
+CSV_DELIMITER = ","
 # 
 
 data = File.read("input.txt")
@@ -34,6 +35,18 @@ win5.each_line do |w5|
   w2b = w5 + "]]"
   data.gsub!(w2a, w2b)
 
+end
+
+ambig_data = File.read("ambiguous_list.txt")
+ambig_data.each_line do |csv_row|
+	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
+  from = fields[0]
+  to = fields[1]
+
+  w1 = "[[" + from + "]]"
+  w2 = "[[" + to + "|" + from + "]]"
+  # My name,My name (bridge) to [[My name (bridge)|My name]]
+  data.gsub!(w1, w2)
 end
 
 file_name = "output.txt"
