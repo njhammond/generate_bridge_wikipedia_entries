@@ -1,228 +1,287 @@
-Ron Andersen
-Russ Arnold
-Hermine Baron
-Roger Bates
-Grant Baze
-B. Jay Becker
-Mike Becker
-Marty A. Bergen
-David Berkowitz (bridge)
-Lisa Berkowitz
-Cheri Bjerkan
-Easley Blackwood, Sr.
-Lou Bluhm
-Malcolm Brachman
-Bart Bramley
-Mildred Breed
-David Bruce (bridge)
-Chuck Burger
-Mike Cappelletti
-Gerald Caravelli
-Drew Casen
-James Cayne
-Juanita Chambers
-Bernie Chazen
-Curtis Cheek
-Dennis Clerkin
-George Coffin
-Larry Cohen (bridge)
-Gary Cohler
-Richard Coren
-Barry Crane
-Carol Crawford
-John R. Crawford
-Ely Culbertson
-Josephine Culbertson
-Lynn Deas
-Richard DeMartino
-Ron Von der Porten
-Seymon Deutsch
-Mike Develin
-Doug Doub
-Billy Eisenberg
-Russ Ekeblad
-Morrie Elis
-Joseph Bowne Elwell
-Bob Etter
-Disa Eythorsdottir
-Ben Fain
-Mary Jane Farell
-Phil Feldesman
-Harry Fishbein
-Arnie Fisher
-Martin Fleisher
-Gene Freed
-Richard Freeman (bridge)
-Richard L. Frey
-Doris Fuller
-Steve Garner
-Benito Garozzo
-Terry W. Gee
-John Gerber (bridge)
-Fred Gitelman
-Jeff Glick
-Brian Glubok
-Bobby Goldman
-Arthur S. Goldsmith
-Agnes Gordon
-Phil Gordon
-Charles Goren
-Michael T. Gottlieb
-Ross Grabel
-Matt Granovetter
-Eric Greco
-Alan C. Greenberg
-Ari Greenberg
-Nancy Gruver
 Ace Gutowsky
-Bob Hamman
-Petra Hamman
-Nicolas Hammond
-Geoff Hampson
-Harold Harkavy
-Emma Jean Hawes
-Garey Hayden
-Lee Hazen
-Christal Henner
-Paul Hodge
-Carl Hudecek
-Zeke Jabbour
-Marc Jacobus
-Oswald Jacoby
-Marilyn Johnson
-Robert F. Jordan
-Charles Kalme
-Michael Kamil
-Edwin Kantar
-Edgar Kaplan
-Gaylor Kasle
-Ralph Katz
-George S. Kaufman
-Norman Kay (bridge)
-Amalya Lyle Kearse
-Edith Kemp
-Alicia Kempner
-Betty Ann Kennedy
-Jim Krekorian
-Mark Lair
-Hemant Lall
-Steve Landen
-Mike Lawrence (bridge)
-Sidney H. Lazard
-Michael Ledeen
-James Lemon
-Peter A. Leventritt
-Bobby Levin
-Irina Levitina
-Theodore Lightner
-Harold Lilie
-Robert H. Lipsitz
-Jim Mahaffey
-Zia Mahmood
-Merwyn D. Maier
-Renee Mancuso
-Ed Manfield
-Chip Martel
-Jan Martel (bridge)
-Lew Mathe
-Karen McCallum
-Jeff Meckstroth
-Rose Meltzer
-Jill Meyers
-Marshall Miles
-Jacqui Mitchell
-Sol Mogal
-John Mohan
-Mark Molson
-Albert Hodges Morehead
-Larry Mori
-Jo Morse
-Brad Moss
-Gail Moss
-Bobby Nail
-Nick Nickell
-Beth Palmer
-Mike Passell
-Richard Pavlicek
-Peter A. Pender
-Leonard Pennario
-Olive Peterson
-Sue Picus
-Rozanne Pollack
-Tommy Prothro
-Jacek Pszczoła
-Shawn Quinn
-Judi Radin
-George Rapée
-Kay Rhodes
-Arthur G. Robinson
-Jim Robison
-Eric Rodwell
-Bill Root (bridge)
-Eunice Rosen
-William Rosen
-Michael Rosenberg
-Alvin Roth
-Dan Rotman
-Jeff Rubens
-Ira Rubin
-Ron Rubin (bridge)
-Carol Sanders
-Thomas K. Sanders
-Howard Schenken
-John Schermer
-Meyer Schleifer
-Peter Schneider (film executive)
-Michael Seamon
-William Seamon
-Janice Seamon-Molson
-Martin Seligman
-Alfred Sheinwold
-Ruth Sherman
-Jaggy Shivdasani
-Rita Shugart
-Allan Siebert
-Sidney Silodor
-P. Hal Sims
-Mike Smolen
-Helen Sobel Smith
-Tobi Sokolow
-Charles J. Solomon
-Peggy Solomon
-Paul Soloway
-Alan Sontag
-Ivar Stakgold
-JoAnna Stansby
-Lew Stansby
-Allan Stauber
-Sam Stayman
-Sherman Stearns
-Tobias Stone
-John Sutherlin
-Peggy Sutherlin
-Paul Swanson
-Edward O. Taylor
-Alan Truscott
-Dorothy Hayden Truscott
-Helen Utegaard
-Harold Stirling Vanderbilt
-Waldemar von Zedtwitz
-Margaret Wagar
-Rhoda Walsh
-Louis H. Watson
-Katherine Wei-Sender
-Peter Weichsel
-Howard Weinstein
-Steve Weinstein
-Albert Weiss
-Roy Welland
 Adam Wildavsky
-Chris Willenken
-Eddie Wold
+Adam Zmudzinski
+Agnes Gordon
+Alan C. Greenberg
+Alan Sontag
+Alan Truscott
+Albert Hodges Morehead
+Albert Weiss
+Alfred Sheinwold
+Alfredo Versace
+Alicia Kempner
+Allan Siebert
+Allan Stauber
+Alvin Roth
+Amalya Lyle Kearse
+Ari Greenberg
+Arnie Fisher
+Arthur G. Robinson
+Arthur S. Goldsmith
+B. Jay Becker
+Barry Crane
+Bart Bramley
+Becky Rogers
+Ben Fain
+Benito Garozzo
+Bernie Chazen
+Beth Palmer
+Betty Ann Kennedy
+Bill Root (bridge)
+Billy Eisenberg
+Bjorn Fallenius
+Bob Etter
+Bob Hamman
+Bobby Goldman
+Bobby Levin
+Bobby Nail
 Bobby Wolff
+Brad Moss
+Brian Glubok
+C. C. Wei
+Carl Hudecek
+Carol Crawford
+Carol Sanders
+Cezary Balicki
+Charles Coon
+Charles Goren
+Charles H. Goren
+Charles J. Solomon
+Charles Kalme
+Cheri Bjerkan
+Chip Martel
+Chris Willenken
+Christal Henner
+Chuck Burger
+Claudio Nunes
+Curtis Cheek
+Dan Morse
+Dan Rotman
+Daniela von Arnim
+David Berkowitz (bridge)
+David Bruce (bridge)
+Debbie Rosenberg
+Dennis Clerkin
+Disa Eythorsdottir
+Donna Compton
+Doris Fuller
+Dorothy Hayden
+Dorothy Hayden Truscott
+Doug Doub
+Dr. Richard H. Katz
+Drew Casen
+Easley Blackwood, Sr.
+Ed Manfield
+Eddie Kantar
+Eddie Wold
+Edgar Kaplan
+Edith Freilich
+Edith Kemp
+Edward Hymes, Jr.
+Edward O. Taylor
+Edwin Kantar
+Ely Culbertson
+Emma Jean Hawes
+Eric Greco
+Eric R. Murray
+Eric Rodwell
+Eunice Rosen
+Fred Gitelman
+Fred Hamilton
+Fred Stewart
+Fulvio Fantoni
+Gail Greenberg
+Gail Moss
+Garey Hayden
+Gary Cohler
 Gavin Wolpert
+Gaylor Kasle
+Geir Helgemo
+Gene Freed
+Geoff Hampson
+George Coffin
+George Jacobs
+George Rapee
+George Rapée
+George Rosenkranz
+George S. Kaufman
+Gerald Caravelli
+Giorgio Duboin
+Grant Baze
+Harold Harkavy
+Harold Lilie
+Harold Stirling Vanderbilt
+Harry Fishbein
+Helen Sobel
+Helen Sobel Smith
+Helen Utegaard
+Hemant Lall
+Hermine Baron
+Hjordis Eythorsdottir
+Howard Schenken
+Howard Weinstein
+Hugh Ross
+Ira Rubin
+Irina Levitina
+Ivar Stakgold
+Jacek Pszczoła
+Jacqui Mitchell
+Jaggy Shivdasani
+James Cayne
+James Lemon
+Jan Martel
+Jan Martel (bridge)
+Janice Seamon-Molson
+Jeff Glick
+Jeff Meckstroth
+Jeff Rubens
 Jenny Wolpert
+Jill Levin
+Jill Meyers
+Jim Jacoby
+Jim Krekorian
+Jim Mahaffey
+Jim Robison
+Jimmy Cayne
+Jo Morse
+JoAnna Stansby
 Joel Wooldridge
+John Diamond
+John Gerber (bridge)
+John Mohan
+John R. Crawford
+John Schermer
+John Sutherlin
+John Swanson
+Joseph Bowne Elwell
+Josephine Culbertson
+Juanita Chambers
+Judi Radin
+Karen McCallum
+Katherine Wei-Sender
+Kay Rhodes
+Kerri Sanborn
 Kit Woolsey
+Kitty Cooper
+Kyle Larsen
+Larry Cohen (bridge)
+Larry Mori
+Larry N. Cohen
+Larry T. Cohen
+Lee Hazen
+Leonard Pennario
+Lew Mathe
+Lew Stansby
+Lewis L. Mathe
+Lisa Berkowitz
+Lorenzo Lauria
+Lou Bluhm
+Louis H. Watson
+Lynn Baker
+Lynn Deas
+Malcolm Brachman
+Marc Jacobus
+Margaret Wagar
+Marilyn Johnson
+Marion Michielsen
+Mark Lair
+Mark Molson
+Marshall Miles
+Martin Fleisher
+Martin Seligman
+Marty A. Bergen
+Marty Bergen
+Mary Jane Farell
+Matt Granovetter
+Meike Wortel
+Merwyn D. Maier
+Meyer Schleifer
+Michael Kamil
+Michael Ledeen
+Michael Rosenberg
+Michael Seamon
+Michael T. Gottlieb
+Mike Becker
+Mike Cappelletti
+Mike Develin
+Mike Lawrence (bridge)
+Mike Passell
+Mike Smolen
+Mildred Breed
 Milton Work
+Morrie Elis
+Nancy Gruver
+Nick Nickell
+Nicolas Hammond
+Norman Kay (bridge)
+Olive Peterson
+Oswald Jacoby
+P. Hal Sims
+Paul Hodge
+Paul Soloway
+Paul Swanson
+Peggy Solomon
+Peggy Sutherlin
+Peter A. Leventritt
+Peter A. Pender
+Peter Boyd
+Peter Schneider (film executive)
+Peter Weichsel
+Petra Hamman
+Phil Feldesman
+Phil Gordon
+Ralph Katz
+Renee Mancuso
+Rhoda Walsh
+Richard Coren
+Richard DeMartino
+Richard Freeman (bridge)
+Richard H. Katz
+Richard L. Frey
+Richard Pavlicek
 Richard Zeckhauser
+Rita Shugart
+Robert F. Jordan
+Robert H. Lipsitz
+Roger Bates
+Ron Andersen
+Ron Rubin (bridge)
+Ron Von der Porten
+Rose Meltzer
+Ross Grabel
+Roy Welland
+Rozanne Pollack
+Russ Arnold
+Russ Ekeblad
+Ruth Sherman
+Sabine Auken
+Sally Young
+Sam Stayman
+Samuel M. Stayman
+Seymon Deutsch
+Shawn Quinn
+Sherman Stearns
+Sidney H. Lazard
+Sidney Silodor
+Sol Mogal
+Steve Garner
+Steve Landen
+Steve Robinson
+Steve Weinstein
+Sue Picus
+Sylvia Moss
+Sylvie Willard
+Terry W. Gee
+Theodore A. Lightner
+Theodore Lightner
+Thomas K. Sanders
+Tobi Sokolow
+Tobias Stone
+Tommy Prothro
+Waldemar K. von Zedtwitz
+Waldemar von Zedtwitz
+William Grieve
+William Rosen
+William Seamon
+Zeke Jabbour
+Zia Mahmood

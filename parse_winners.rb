@@ -47,8 +47,8 @@ buffett_ref = ""
 rosenblum_ref = "<ref>[http://www.worldbridge.org/world-open-teams.aspx Rosenblum Cup Winners]</ref>"
 transnational_ref = "<ref>[http://www.worldbridge.org/transnational-open-teams.aspx World Transational Open Teams Winners]</ref>"
 von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge - von Zedtwitz Award]</ref>"
-wbf_ref = "<ref>[http://www.worldbridge.org/world-team-championships.aspx World Team Championship Winners]</ref>"
-world_senior_teams_ref = "<ref>[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
+wbf_ref = "<ref name=\"WBF Winners\">[http://www.worldbridge.org/world-team-championships.aspx World Team Championship Winners]</ref>"
+world_senior_teams_ref = "<ref name=\"WBF Senior Teams Winners\">[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
 # | title = "Fishbein"
 # | author = 
 # | publisher = American Contract Bridge League
@@ -406,7 +406,7 @@ def get_reference(event)
     date = event[:date]
     today = Time.now
     d1 = today.strftime("%Y-%m-%d")
-    s = "<ref>{{cite news
+    s = "<ref name=\"#{event[:title]} Winners\">{{cite news
  | title = #{event[:title]}
  | author = 
  | publisher = American Contract Bridge League
@@ -423,7 +423,7 @@ end
 def get_hof_reference(name, hof_id)
   today = Time.now
   d1 = today.strftime("%Y-%m-%d")
-  s = "<ref>{{cite web 
+  s = "<ref name=\"ACBL HOF\">{{cite web 
  | title = Hall of Fame
  | author = 
  | publisher = ACBL
