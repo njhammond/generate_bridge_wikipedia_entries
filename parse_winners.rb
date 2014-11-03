@@ -246,7 +246,7 @@ def check_if_has_honor(name)
   end
   # Check honorary members XX
 
-  puts "name=#{name} h=#{has_honor} hof=#{in_acbl_hof} in_acbl_honorary_members=#{in_acbl_honorary_members} e=#{e} "
+#  puts "name=#{name} h=#{has_honor} hof=#{in_acbl_hof} in_acbl_honorary_members=#{in_acbl_honorary_members} e=#{e} "
   return has_honor, in_acbl_hof, in_acbl_honorary_members, e
 end
 
