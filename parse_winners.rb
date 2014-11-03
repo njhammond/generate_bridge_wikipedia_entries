@@ -83,8 +83,10 @@ acbl_hof_data.each_line do |csv_row|
 	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
   year = fields[0]
   name = fields[1]
-  ref = fields[2]
+  old_ref = fields[2]
+  ref = fields[3]
   $acbl_hofs_db[name][:year] = year
+  $acbl_hofs_db[name][:old_ref] = old_ref
   $acbl_hofs_db[name][:ref] = ref
 #  e = $acbl_hofs_db[name]
 #  e[:year] = year
@@ -406,7 +408,7 @@ def get_reference(event)
     date = event[:date]
     today = Time.now
     d1 = today.strftime("%Y-%m-%d")
-    s = "<ref name=\"#{event[:title]} Winners\">{{cite news
+    s = "<ref name=\"#{event[:title]}\">{{cite news
  | title = #{event[:title]}
  | author = 
  | publisher = American Contract Bridge League
