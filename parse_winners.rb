@@ -8,7 +8,24 @@ require 'time'
 # Slurp in winners file
 #Year,Event,Place,Player 1,
 #1946,Wernher Open Pairs,1,A. Mitchell Barnes,0
-data = File.read("winners.csv")
+#data = File.read("winners.csv")
+
+# Read in list of files from 
+data = ""
+
+# Get winners
+dir="nabc_winners"
+Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
+	file_name = dir + "/" + f
+	next if File.directory? file_name
+	data << File.read(file_name)
+end
+
+dir="nabc_winners/retired"
+Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
+	file_name = dir + "/" + f
+	data << File.read(file_name)
+end
 
 players = Array.new
 winners = Array.new
@@ -73,6 +90,7 @@ event_data.each_line do |csv_row|
   e[:url] = fields[3]
   e[:page] = fields[4]
   e[:date] = fields[5]
+  e[:cite] = fields[6]
 end
 
 # Read in HOF data
@@ -135,9 +153,9 @@ end
 # Generic routine to read a CSV file that has format
 # Year,Position,Name
 def read_year_position_name(file_name)
-  data = File.read(file_name)
+  file_data = File.read(file_name)
   winners = Array.new
-  data.each_line do |csv_row|
+  file_data.each_line do |csv_row|
 	  fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
     year = fields[0]
     position = fields[1]
@@ -154,9 +172,9 @@ end
 # Generic routine to read a CSV file that has format
 # Year,Name
 def read_year_name(file)
-  data = File.read(file)
+  file_data = File.read(file)
   winners = Array.new
-  data.each_line do |csv_row|
+  file_data.each_line do |csv_row|
   	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
     year = fields[0]
     name = fields[1]
@@ -399,10 +417,35 @@ end
 
 # Returns a Wikipidea reference from the event file.
 # When we start to get other publishers, update this routine
+# Passed in an event. Last field in event is if this is a web link, or a newspaper article.
 def get_reference(event)
   s = ""
 
   return s if (event[:title].nil?)
+
+  if (event[:title].to_s.length > 1) then
+		if (event[:cite] == "news") then
+			s = get_reference_news(event)
+			return s
+		end
+		if (event[:cite] == "none") then
+			return s
+		end
+		if (event[:cite] == "web") then
+			s = get_reference_web(event)
+			return s
+		end
+  end
+
+  return s
+end
+
+# Get reference for a news page
+def get_reference_news(event)
+  s = ""
+  return s if (event[:title].nil?)
+  return s if (event[:url].nil?)
+  return s if (event[:url].length < 1)
 
   if (event[:title].to_s.length > 1) then
     date = event[:date]
@@ -418,6 +461,26 @@ def get_reference(event)
  | accessdate = #{d1} }}</ref>"
   end
 
+  return s
+end
+
+# Get reference for a web
+def get_reference_web(event)
+  s = ""
+  return s if (event[:title].nil?)
+  return s if (event[:url].nil?)
+  return s if (event[:url].length < 1)
+
+  today = Time.now
+  d1 = today.strftime("%Y-%m-%d")
+  date = d1
+  s = "<ref name=\"#{event[:title]}\">{{cite web
+ | title = #{event[:title]}
+ | author = 
+ | publisher = ACBL
+ | url = #{event[:url]}
+ | date = #{date}
+ | accessdate = #{d1} }}</ref>"
   return s
 end
 
@@ -838,6 +901,7 @@ player_db.each do |ph,pk|
       fd.puts "===Awards==="
       fd.puts ""
 
+			# Alphabetical order...
       if (in_acbl_kob == 1) then
         nentries, years_s = get_acbl_kob_data(ph, 1, has_alter_egos, alter_egos)
         # Can only win it once
@@ -846,6 +910,10 @@ player_db.each do |ph,pk|
       if (in_acbl_poy == 1) then
         nentries, years_s = get_acbl_poy_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* ACBL Player of the Year (#{nentries}) #{years_s}"
+      end
+      if (in_blackwood == 1) then
+        nentries, years_s = get_blackwood_data(ph, 1, has_alter_egos, alter_egos)
+        fd.puts "* Blackwood Award #{years_s} #{blackwood_ref}"
       end
       if (in_fishbein == 1) then
         nentries, years_s = get_fishbein_data(ph, 1, has_alter_egos, alter_egos)
@@ -862,10 +930,6 @@ player_db.each do |ph,pk|
       if (in_mott_smith == 1) then
         nentries, years_s = get_mott_smith_data(ph, 1, has_alter_egos, alter_egos)
         fd.puts "* [[Mott-Smith Trophy]] (#{nentries}) #{years_s}"
-      end
-      if (in_blackwood == 1) then
-        nentries, years_s = get_blackwood_data(ph, 1, has_alter_egos, alter_egos)
-        fd.puts "* Blackwood Award #{years_s} #{blackwood_ref}"
       end
       if (in_zedtwitz == 1) then
         nentries, years_s = get_zedtwitz_data(ph, 1, has_alter_egos, alter_egos)
@@ -985,7 +1049,7 @@ player_db.each do |ph,pk|
     if (nnabc_wins > 0) then
       fd.puts "* [[North American Bridge Championships]] (#{nnabc_wins})"
 
-      win_events.each do |h,k|
+      win_events.sort.each do |h,k|
         years = Array.new
         winners.each do |w|
         # Print their first place
@@ -1140,7 +1204,7 @@ player_db.each do |ph,pk|
         end
       end
 
-      win_events.each do |h,k|
+      win_events.sort.each do |h,k|
         years = Array.new
         winners.each do |w|
         # Print their second place
