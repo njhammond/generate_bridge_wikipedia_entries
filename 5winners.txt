@@ -1,296 +1,302 @@
-Arthur G. Robinson
-Sylvia Stein
-John R. Crawford
-Edgar Kaplan
-Norman Kay
-Alvin Roth
-B. Jay Becker
-Tobias Stone
-Harry Fishbein
-Peter A. Leventritt
-Sidney Silodor
-Morrie Elis
-George Rapee
-Charles J. Solomon
-Robert A. McPherran
-Charles H. Goren
-Albert Weiss
-Olive Peterson
-Lee Hazen
-Merwyn D. Maier
-Alvin Landy
-Waldemar K. von Zedtwitz
-Oswald Jacoby
-David Bruce
-Howard Schenken
-Willard S. Karn
-Richard L. Frey
-Phil Feldesman
-Zia Mahmood
-Giorgio Duboin
-Ross Grabel
-Steve Weinstein
-Alan Sontag
-Martin Fleisher
-Norberto Bocchi
-Hemant Lall
-Nikolay Demirev
-Eric Greco
-Geoff Hampson
-Chip Martel
-Howard Weinstein
-Renee Mancuso
+Peter Boyd
 Bart Bramley
-Bjorn Fallenius
+Doug Doub
+Gavin Wolpert
 Bill Pollack
+Rozanne Pollack
+Joel Wooldridge
+Nikolay Demirev
+Jim Krekorian
+Chris Willenken
+Steve Landen
+JoAnna Stansby
+Lew Stansby
+Jill Meyers
+Tom Kniest
+Gary Cohler
+David Berkowitz
+Lisa Berkowitz
+Boris Baran
+Sidney H. Lazard
+Dennis Clerkin
+Bobby Nail
+Dan Morse
+Chip Martel
+Jan Martel
+Stasha Cohen
+Steve Robinson
+Hugh Ross
+Peter A. Pender
+Steve Sion
+Larry N. Cohen
+Marty Bergen
+Cliff Russell
+Richard Pavlicek
+Larry Mori
+Rose Meltzer
 John Mohan
+Steve Garner
+Ron Smith
+Gaylor Kasle
+Neil Chambers
+John Schermer
+Marc Jacobus
+Mike Passell
+Jeff Meckstroth
+Eric Rodwell
+Garey Hayden
+Adam Zmudzinski
+Cezary Balicki
+Fred Stewart
+Kit Woolsey
+Bob Hamman
+Kyle Larsen
+Eddie Wold
+Roger Bates
+John Sutherlin
+Mark Lair
+Fred Hamilton
+Arnie Fisher
+Matt Granovetter
+P.O. Sundelin
+Sam Lev
+Pat McDevitt
+Richard DeMartino
+Allan Siebert
+Bobby Wolff
+Mike Levine
+Zeke Jabbour
+Gene Freed
+Billy Eisenberg
+Jim Robison
+Bernie Chazen
+Chuck Burger
+Robert H. Lipsitz
+Thomas K. Sanders
+Russ Arnold
+Sylvie Willard
+Benedicte Cronier
+Joan Eaton
+Beth Palmer
+Alan Sontag
+Lynn Deas
+Petra Hamman
+Debbie Rosenberg
+Peggy Kaplan
+Hemant Lall
+Warren Spector
+Richard Coren
+Michael Seamon
+Mike Becker
+Brian Glubok
+Bobby Levin
+Roy Welland
+Peggy Sutherlin
+Perry Johnson
+Jim Mahaffey
+Malcolm Brachman
+Peter Weichsel
+Russ Ekeblad
+Mark Molson
+Ross Grabel
+Bobby Goldman
+Curtis Cheek
+Disa Eythorsdottir
+Geoff Hampson
+Gerald Caravelli
+Harold Lilie
+Jimmy Cayne
+Brad Moss
+Ed Manfield
+Bill Root
+Ron Rubin
+Howard Weinstein
+Steve Weinstein
+Mike Lawrence
+Jim Jacoby
+Seymon Deutsch
+Ralph Katz
+Lou Bluhm
 Nick Nickell
 Richard Freeman
-Michael Rosenberg
-Ralph Katz
-Tobi Sokolow
-Curtis Cheek
-Lynn Deas
-Bobby Levin
-Gary Cohler
-Sam Lev
-Brad Moss
-Fred Gitelman
-Richard Pavlicek
-Steve Garner
-Geir Helgemo
-Tony Forrester
-David Berkowitz
-Larry N. Cohen
-Allan Siebert
-Bill Root
-Eddie Wold
-Steve Sion
-Dan Morse
-John Sutherlin
-Bob Hamman
-Hugh Ross
-Eric Rodwell
-Mike Becker
-Ron Rubin
-Kay Schulle
-Dr. Richard H. Katz
-Marty Bergen
-Peter Boyd
-Steve Robinson
-Mike Lawrence
-Peter Weichsel
-Eddie Kantar
-Jeff Meckstroth
-Ron Andersen
-Thomas K. Sanders
-Robert H. Lipsitz
-Fred Stewart
-Bobby Nail
-Marilyn Johnson
-Mary Jane Farell
-Garey Hayden
-Mike Passell
-Paul Swanson
-Chuck Burger
-Jimmy Cayne
-Jim Jacoby
-Michael Moss
-Eric R. Murray
-Sami R. Kehela
-Billy Eisenberg
-Bobby Goldman
-Bobby Wolff
-Lewis L. Mathe
-Hermine Baron
-Meyer Schleifer
-Samuel M. Stayman
-Victor Mitchell
-Dorothy Hayden
-Edward O. Taylor
-Ira Rubin
-Edith Kemp
-Marshall Miles
-Helen Portugal
-Dan Rotman
-Helen Sobel
-Ben Fain
-Paul Hodge
-David C. Carter
-Billy Rosen
-Milton Q. Ellenby
-Richard Kahn
-Theodore A. Lightner
-Ruth Sherman
-Samuel Katz
-Margaret Wagar
-Sam Fry Jr.
-Sherman Stearns
-Charles S. Lochridge
-Doris Fuller
-P. Hal Sims
-Michael T. Gottlieb
-Joel Wooldridge
-Adam Wildavsky
-Doug Doub
-Richard DeMartino
-Neil Chambers
-George Jacobs
-Gene Freed
-Jim Robison
-Harold Lilie
-Richard Schwartz
-Fred Hamilton
-Michael Seamon
-Gaylor Kasle
-Gerald Caravelli
-Charles Coon
-Rhoda Walsh
-George Rosenkranz
-Richard Coren
-Michael Kamil
-John Diamond
-Allan Stauber
-Chris Willenken
-Ron Smith
-Linda Lewis
-Janice Seamon-Molson
-Gail Greenberg
-Judi Radin
-Kerri Sanborn
-Mildred Breed
-Kitty Cooper
-Rozanne Pollack
-Terry Michaels
-Bernie Chazen
-Arnie Fisher
-Larry Mori
-Jo Ann Manfield
-Dorothy Truscott
-Lisa Berkowitz
-Juanita Chambers
-Beth Palmer
 Ron Von der Porten
-Barry Crane
-Kerri Shuman
-Mike Smolen
-Carol Sanders
-Gail Moss
-Nancy Gruver
-Helen Utegaard
-Peggy Sutherlin
-Gratian Goldstein
-Evelyn Levitt
-John Gerber
-Kit Woolsey
-Peter A. Pender
-Agnes Gordon
-Peggy Solomon
-Sidney H. Lazard
-Stella Rebner
-Alicia Kempner
-Ann Burnstein
-Gavin Wolpert
-Jill Meyers
-Jill Levin
-Steve Landen
-Roy Welland
-Alfredo Versace
-Petra Hamman
-Ed Manfield
-Seymon Deutsch
-Russ Ekeblad
-Perry Johnson
-Lew Stansby
-Lou Bluhm
+George Rosenkranz
+Michael Rosenberg
+Edith Kemp
+William Seamon
+Allan Stauber
+Billy Rosen
+Dan Rotman
+Steven J. Parker
+Eddie Kantar
+John Swanson
+Paul Soloway
+Martin Fleisher
 Dr. John Fisher
-Matt Granovetter
-Sue Sachs
-Ivar Stakgold
-Robert F. Jordan
+Dr. Richard H. Katz
+Larry Cohen
+Sabine Auken
+Zia Mahmood
+Richard Schwartz
+Tony Forrester
+Fred Gitelman
+John Diamond
+Eric Greco
+Giorgio Duboin
+Michael Moss
+Norberto Bocchi
+Geir Helgemo
+Tor Helness
 Claudio Nunes
 Fulvio Fantoni
-Mark Molson
-Larry Cohen
-Paul Soloway
-Kyle Larsen
+Michael Kamil
+Bjorn Fallenius
+Alfredo Versace
+George Jacobs
+Lorenzo Lauria
+Kay Schulle
+Grant Baze
+Edgar Kaplan
+Norman Kay
+Mike Smolen
+Ron Andersen
 Erik Paulsen
-William Grieve
+Barry Crane
+Ira Rubin
+Daniela von Arnim
+Adam Wildavsky
+Kerri Shuman
+Hermine Baron
+Eric R. Murray
+Sami R. Kehela
+Lewis L. Mathe
+Phil Feldesman
+Charles Coon
+Gratian Goldstein
+B. Jay Becker
+Dorothy Hayden
 Harold Harkavy
-Sol Mogal
-Joann Glasson
+Andrew Gromov
+Renee Mancuso
+Shawn Quinn
+Irina Levitina
+Karen Allison
+Dorothy Truscott
+Jo Ann Manfield
+Shawn Womack
+Judi Radin
+Juanita Chambers
+Kitty Bethe
+Dorothy Hayden Truscott
+Pam Wittes
+Rhoda Walsh
+Corinne Kirkham
 Sylvia Moss
-Disa Eythorsdottir
+Joann Glasson
+Kerri Sanborn
+Mildred Breed
 Valerie Westheimer
-Margie Gwozdzinsky
-Amalya Kearse
-Jacqui Mitchell
+Jill Levin
+Janice Seamon-Molson
+Tobi Sokolow
+Jenny Wolpert
 Cheri Bjerkan
 Sue Weinstein
 Karen McCallum
-Shawn Quinn
-Betty Ann Kennedy
-Shawn Womack
-Janice Seamon
-June Deutsch
-Tobi Deutsch
-Jan Martel
-Edith Freilich
-Jo Morse
-Sue Picus
-Nancy Alpaugh
-Dorothy Hayden Truscott
-Emma Jean Hawes
-Kay Rhodes
-Edith Seligman
-Sally Young
-Jim Krekorian
-Daniela von Arnim
-Sabine Auken
-Marc Jacobus
-Mark Lair
-Brian Glubok
-Roger Bates
-Cliff Russell
-Mary Jane Kauder
-Jeff Glick
-Tor Helness
-JoAnna Stansby
-P.O. Sundelin
-Zeke Jabbour
-John Swanson
-Arthur S. Goldsmith
-Edward Hymes Jr.
-Boris Baran
-Dennis Clerkin
-Stasha Cohen
 Lynn Baker
-Kathie Wei
-Karen Allison
-Debbie Rosenberg
-Warren Spector
-Jim Mahaffey
-Malcolm Brachman
-Rose Meltzer
-Russ Arnold
-William Seamon
-Antonio Sementa
-Christal Henner-Welland
-Lorenzo Lauria
-Adam Zmudzinski
-Cezary Balicki
-Grant Baze
-Irina Levitina
-Benedicte Cronier
-Jenny Wolpert
-Sylvie Willard
-Pam Wittes
+Sue Picus
 Randi Montin
+Betty Ann Kennedy
 Kathie Wei-Sender
+Amalya Kearse
+Gail Greenberg
+Jacqui Mitchell
+Linda Lewis
+Jo Morse
 Joyce Lilie
-Marty Fleisher
-Andrew Gromov
-Mike Levine
+Sue Sachs
+Carol Sanders
+Tobi Deutsch
+Margie Gwozdzinsky
+Helen Utegaard
+Janice Seamon
+Nancy Alpaugh
+June Deutsch
+Kathie Wei
+Evelyn Levitt
+Gail Moss
+Mary Jane Farell
+Nancy Gruver
+Victor Mitchell
+Samuel M. Stayman
+Alvin Roth
+George Rapee
+William Grieve
+John R. Crawford
+Paul Swanson
+Charles J. Solomon
+Harry Fishbein
+Tobias Stone
+Sidney Silodor
+Edward O. Taylor
+John Gerber
+Paul Hodge
+Oswald Jacoby
+Alvin Landy
+Arthur S. Goldsmith
+Jeff Glick
+Meyer Schleifer
+Ivar Stakgold
+Ben Fain
+Charles H. Goren
+Peter A. Leventritt
+Sol Mogal
+Albert Weiss
+Samuel Katz
+Waldemar K. von Zedtwitz
+David C. Carter
+Howard Schenken
+Robert F. Jordan
+Marilyn Johnson
+Mary Jane Kauder
+Helen Portugal
+Margaret Wagar
+Helen Sobel
+Olive Peterson
+Ruth Sherman
+Sally Young
+Robert A. McPherran
+Richard Kahn
+Charles S. Lochridge
+Kitty Cooper
+Terry Michaels
+Betty Kaplan
+Agnes Gordon
+Peggy Solomon
+Stella Rebner
+Sylvia Stein
+Alicia Kempner
+Ann Burnstein
+Sam Fry Jr.
 Pierre Zimmermann
 Franck Multon
-John Schermer
+Arthur G. Robinson
+Marshall Miles
+Lee Hazen
+Kay Rhodes
+Theodore A. Lightner
+Edith Seligman
+Merwyn D. Maier
+Richard L. Frey
+Sherman Stearns
+P. Hal Sims
+Michael T. Gottlieb
+David Bruce
+Willard S. Karn
+Marty Fleisher
+Emma Jean Hawes
+Milton Q. Ellenby
+Edward Hymes Jr.
+Morrie Elis
+Doris Fuller
+Edith Freilich
