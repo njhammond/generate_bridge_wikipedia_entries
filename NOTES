@@ -6,3 +6,6 @@ August 2, 2016
 Added Gold Cup
 Some ambiguity since I added Gold Cup. e.g. "William Cole" won Gold Cup in UK. A US player is also called "William Cole". Therefore there are errors.
 
+To add Gold Cup, added new directory: competitions
+Need to modify parse_winners.rb to read this file and do something with it.
+
