@@ -12,6 +12,9 @@ require 'time'
 
 # Read in list of files from 
 data = ""
+# Update when needed. Any change will affect ALL entries...
+DATE = "2016-07-31"
+ACCESS_DATE = "2016-07-31"
 
 # Get winners
 dir="nabc_winners"
@@ -27,8 +30,17 @@ Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
 	data << File.read(file_name)
 end
 
+# Add other competitions
+dir="competitions"
+Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
+	file_name = dir + "/" + f
+	next if File.directory? file_name
+	data << File.read(file_name)
+end
+
 players = Array.new
 winners = Array.new
+nabc_winners = Array.new
 player_db = Hash.new { |h, k| h[k] = Hash.new(0) }
 #ph = Hash.new { Array.new }
 #win = Hash.new
@@ -61,11 +73,23 @@ d1 = today.strftime("%Y-%m-%d")
 acbl_honorary_members_ref = "<ref>[http://www.acbl.org/about-acbl/honorary-members/ ACBL Honorary Members]</ref>"
 blackwood_ref = "<ref>[http://www.fpabridge.org/blackwood.htm Foundation for the Preservation and Advancement of Bridge - Blackwood Award]</ref>"
 buffett_ref = ""
+cavendish_ref = ""
+#gold_cup_ref = "<ref name=\"Gold Cup Winners\">[http://www.bridgewebs.com/bgb/Gold%20Cup%20Roll%20of%20Honour.htm Gold Cup Winners]</ref>"
+gold_cup_ref = "<ref name=\"Gold Cup Winners\">{{cite web
+ | title = Gold Cup Winners
+ | author = 
+ | publisher =
+ | url = http://www.bridgewebs.com/bgb/Gold%20Cup%20Roll%20of%20Honour.htm
+ | date =
+ | accessdate = #{ACCESS_DATE} }}</ref>"
 rosenblum_ref = "<ref>[http://www.worldbridge.org/world-open-teams.aspx Rosenblum Cup Winners]</ref>"
 transnational_ref = "<ref>[http://www.worldbridge.org/transnational-open-teams.aspx World Transational Open Teams Winners]</ref>"
 von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge - von Zedtwitz Award]</ref>"
 wbf_ref = "<ref name=\"WBF Winners\">[http://www.worldbridge.org/world-team-championships.aspx World Team Championship Winners]</ref>"
 world_senior_teams_ref = "<ref name=\"WBF Senior Teams Winners\">[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
+
+
+
 # | title = "Fishbein"
 # | author = 
 # | publisher = American Contract Bridge League
@@ -154,36 +178,57 @@ end
 # Year,Position,Name
 def read_year_position_name(file_name)
   file_data = File.read(file_name)
-  winners = Array.new
+  local_winners = Array.new
   file_data.each_line do |csv_row|
 	  fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
     year = fields[0]
     position = fields[1]
     name = fields[2]
-    winners << {
+    local_winners << {
       year: year,
       position: position,
       name: name
     }
   end
-  return winners
+  return local_winners
+end
+
+# Data with positions.
+# Generic routine to read a CSV file that has format
+# Year,Position,Name
+def read_event_year_position_name(file_name)
+  file_data = File.read(file_name)
+  local_winners = Array.new
+  file_data.each_line do |csv_row|
+	  fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
+    year = fields[0]
+    event = fields[1]
+    position = fields[2]
+    name = fields[3]
+    local_winners << {
+      year: year,
+      position: position,
+      name: name
+    }
+  end
+  return local_winners
 end
 
 # Generic routine to read a CSV file that has format
 # Year,Name
 def read_year_name(file)
   file_data = File.read(file)
-  winners = Array.new
+  local_winners = Array.new
   file_data.each_line do |csv_row|
   	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
     year = fields[0]
     name = fields[1]
-    winners << {
+    local_winners << {
       year: year,
       name: name
     }
   end
-  winners
+  local_winners
 end
 
 # Bermuda Bowl
@@ -205,6 +250,7 @@ $world_olympiad_womens_teams_winners = read_year_position_name("world_olympiad_w
 
 # Other events
 $cavendish_pairs_winners = read_year_position_name("cavendish_pairs.csv")
+$gold_cup_winners = read_event_year_position_name("competitions/gold_cup.csv")
 
 # Honorary
 $acbl_honorary_members_winners = read_year_name("acbl_honorary_members.csv")
@@ -458,7 +504,7 @@ def get_reference_news(event)
  | url = #{event[:url]}
  | page = #{event[:page]}
  | date = #{date}
- | accessdate = #{d1} }}</ref>"
+ | accessdate = #{ACCESS_DATE} }}</ref>"
   end
 
   return s
@@ -479,8 +525,8 @@ def get_reference_web(event)
  | author = 
  | publisher = ACBL
  | url = #{event[:url]}
- | date = #{date}
- | accessdate = #{d1} }}</ref>"
+ | date =
+ | accessdate = #{ACCESS_DATE} }}</ref>"
   return s
 end
 
@@ -493,8 +539,8 @@ def get_hof_reference(name, hof_id)
  | author = 
  | publisher = ACBL
  | url = http://www.acbl.org/about/hall-of-fame/members/#{hof_id}
- | date = 
- | accessdate = #{d1} }}</ref>"
+ | date =
+ | accessdate = #{ACCESS_DATE} }}</ref>"
  s
 end
 
@@ -588,6 +634,10 @@ def get_cavendish_pairs_data(player_name, position, has_alter_ego, alter_egos)
   get_year_position_data($cavendish_pairs_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
+def get_gold_cup_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($gold_cup_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
 # Returns the bermuda bowl data for a player
 # returns nentries, years (in string)
 def get_award_data(award_data, player_name, position, has_alter_egos, alter_egos)
@@ -665,10 +715,15 @@ data.each_line do |csv_row|
 		next
 	end
 
+	next if (fields.nil?)
+
 	year = fields[0]
 	event_name = fields[1]
 	place = fields[2]
   player = fields[3]
+
+	next if (year.nil?)
+	next if (year.to_i < 1)
 
   pdf = player_db[player]
   pdf[:wins] ||= 0
@@ -677,19 +732,21 @@ data.each_line do |csv_row|
 
   players << player
 
-  winners << { 
-	  year: fields[0],
-		event_name: fields[1],
-		place: fields[2],
-		player: fields[3]
-	}
+	if (fields[1] != "Gold Cup") then
+	  nabc_winners << { 
+		  year: fields[0],
+			event_name: fields[1],
+			place: fields[2],
+			player: fields[3]
+		}
+	end
 
-  winner = {
-	  year: fields[0],
-		event_name: fields[1],
-		place: fields[2],
-		player: fields[3]
-  }
+#  winner = {
+#	  year: fields[0],
+#		event_name: fields[1],
+#		place: fields[2],
+#		player: fields[3]
+#  }
 end
 
 # Returns 1 if this has has alternative names
@@ -737,10 +794,16 @@ player_db.each do |ph,pk|
 #  ph.chomp!
 #  puts "Player_db #{h} = #{k} "
 
+	next if (ph.nil?)
+	#next if (ph.blank?)
+
   player_name = ph
+
   # If this is a blank line, slip
   next if (ph.size <= 1)
 
+	# To speed up work, can work on just one player.
+	# next if player_name != "Zachary Grossack"
 
   alter_egos = check_if_has_alternative_names(player_name)
   has_alter_egos = (alter_egos.size == 0) ? 0 : 1
@@ -758,7 +821,7 @@ player_db.each do |ph,pk|
     nnabc_wins = 0
     nnabc_seconds = 0
     win_events = Hash.new
-    winners.each do |w|
+    nabc_winners.each do |w|
       if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
      # Count first place only
 #      if (ph == w[:player]) then
@@ -828,6 +891,10 @@ player_db.each do |ph,pk|
         country_ref = "is a [[Canadian|Canadian]]"
         short_description = "Canadian contract bridge player"
         wiki_category = "[[Category:Canadian bridge players]]"
+      when "ENG"
+        country_ref = "is a [[English|English]]"
+        short_description = "English contract bridge player"
+        wiki_category = "[[Category:English bridge players]]"
       when "FRA"
         country_ref = "is a [[France|French]]"
         short_description = "French contract bridge player"
@@ -1032,17 +1099,24 @@ player_db.each do |ph,pk|
       fd.puts ""
     end
 
-    # Check for Cavendish
-    nentries, years_s = get_cavendish_pairs_data(ph, 1, has_alter_egos, alter_egos)
-    if (nentries > 0) then
-      fd.puts "* [[Cavendish Invitational|Cavendish Invitational Pairs]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
-    end
-
     # Check for Buffett Cup Bowl
     nentries, years_s = get_buffett_cup_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{buffett_ref}"
+      fd.puts ""
+    end
+
+    # Check for Cavendish
+    nentries, years_s = get_cavendish_pairs_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[Cavendish Invitational|Cavendish Invitational Pairs]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # Check for Gold Cup
+    nentries, years_s = get_gold_cup_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[Gold Cup (bridge)|Gold Cup]] (#{nentries}) #{years_s} #{gold_cup_ref}"
       fd.puts ""
     end
 
@@ -1051,7 +1125,7 @@ player_db.each do |ph,pk|
 
       win_events.sort.each do |h,k|
         years = Array.new
-        winners.each do |w|
+        nabc_winners.each do |w|
         # Print their first place
           if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
 #          if (ph == w[:player]) then
@@ -1176,13 +1250,6 @@ player_db.each do |ph,pk|
       fd.puts ""
     end
 
-    # Check for Cavendish
-    nentries, years_s = get_cavendish_pairs_data(ph, 2, has_alter_egos, alter_egos)
-    if (nentries > 0) then
-      fd.puts "* [[Cavendish Invitational|Cavendish Invitational Pairs]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
-    end
-
     # Check for Buffett Cup Bowl
     nentries, years_s = get_buffett_cup_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
@@ -1190,11 +1257,25 @@ player_db.each do |ph,pk|
       fd.puts ""
     end
 
+    # Check for Cavendish
+    nentries, years_s = get_cavendish_pairs_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[Cavendish Invitational|Cavendish Invitational Pairs]] (#{nentries}) #{years_s}"
+      fd.puts ""
+    end
+
+    # Check for Gold Cup
+    nentries, years_s = get_gold_cup_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[Gold Cup (bridge)|Gold Cup]] (#{nentries}) #{years_s} #{gold_cup_ref}"
+      fd.puts ""
+    end
+
     if (nnabc_seconds > 0) then
       fd.puts "* [[North American Bridge Championships]] (#{nnabc_seconds})"
 
       win_events = Hash.new
-      winners.each do |w|
+      nabc_winners.each do |w|
        # Print their second + higher place
         if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
           if is_second_place(w[:place]) == 1 then
@@ -1206,7 +1287,7 @@ player_db.each do |ph,pk|
 
       win_events.sort.each do |h,k|
         years = Array.new
-        winners.each do |w|
+        nabc_winners.each do |w|
         # Print their second place
           if (player_name_match(player_name, w[:player], has_alter_egos, alter_egos) == 1) then
 #          if ph == w[:player] then
