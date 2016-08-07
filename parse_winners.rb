@@ -467,6 +467,7 @@ end
 def get_reference(event)
   s = ""
 
+#puts "In get_reference. event title is #{event[:title]} cite=#{event[:cite]}"
   return s if (event[:title].nil?)
 
   if (event[:title].to_s.length > 1) then
@@ -1147,6 +1148,7 @@ player_db.each do |ph,pk|
         event_name = events_db[h][:name]
 
         ref = get_reference(events_db[h])
+#puts "ref=#{ref} events_db[h]=#{events_db[h]}"
         fd.puts "** #{event_name} (#{years.count}) #{years_s} #{ref}"
 
       end
