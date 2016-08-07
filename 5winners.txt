@@ -12,7 +12,6 @@ Steve Landen
 JoAnna Stansby
 Lew Stansby
 Jill Meyers
-Tom Kniest
 Gary Cohler
 David Berkowitz
 Lisa Berkowitz
@@ -60,7 +59,6 @@ Arnie Fisher
 Matt Granovetter
 P.O. Sundelin
 Sam Lev
-Pat McDevitt
 Richard DeMartino
 Allan Siebert
 Bobby Wolff
@@ -74,15 +72,14 @@ Chuck Burger
 Robert H. Lipsitz
 Thomas K. Sanders
 Russ Arnold
+John Hurd
 Sylvie Willard
 Benedicte Cronier
-Joan Eaton
 Beth Palmer
 Alan Sontag
 Lynn Deas
 Petra Hamman
 Debbie Rosenberg
-Peggy Kaplan
 Hemant Lall
 Warren Spector
 Mike Becker
@@ -127,7 +124,6 @@ William Seamon
 Allan Stauber
 Billy Rosen
 Dan Rotman
-Steven J. Parker
 Eddie Kantar
 John Swanson
 Paul Soloway
@@ -142,11 +138,13 @@ Tony Forrester
 Fred Gitelman
 John Diamond
 Eric Greco
+Antonio Sementa
 Giorgio Duboin
 Michael Moss
 Norberto Bocchi
 Geir Helgemo
 Tor Helness
+Christal Henner-Welland
 Claudio Nunes
 Fulvio Fantoni
 Michael Kamil
@@ -186,11 +184,9 @@ Jo Ann Manfield
 Shawn Womack
 Judi Radin
 Juanita Chambers
-Kitty Bethe
 Dorothy Hayden Truscott
 Pam Wittes
 Rhoda Walsh
-Corinne Kirkham
 Sylvia Moss
 Joann Glasson
 Kerri Sanborn
@@ -268,21 +264,14 @@ Sally Young
 Robert A. McPherran
 Richard Kahn
 Charles S. Lochridge
-Kitty Cooper
-Terry Michaels
-Betty Kaplan
-Agnes Gordon
-Peggy Solomon
-Stella Rebner
-Sylvia Stein
-Alicia Kempner
-Ann Burnstein
 Sam Fry Jr.
 Pierre Zimmermann
 Franck Multon
 Arthur G. Robinson
 Marshall Miles
+Peggy Solomon
 Lee Hazen
+Agnes Gordon
 Kay Rhodes
 Theodore A. Lightner
 Edith Seligman
@@ -293,6 +282,12 @@ P. Hal Sims
 Michael T. Gottlieb
 David Bruce
 Willard S. Karn
+Kitty Cooper
+Terry Michaels
+Stella Rebner
+Sylvia Stein
+Alicia Kempner
+Ann Burnstein
 Marty Fleisher
 Emma Jean Hawes
 Milton Q. Ellenby
