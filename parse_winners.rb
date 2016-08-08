@@ -893,7 +893,7 @@ player_db.each do |ph,pk|
         short_description = "Canadian contract bridge player"
         wiki_category = "[[Category:Canadian contract bridge players]]"
       when "ENG"
-        country_ref = "is a [[English|English]]"
+        country_ref = "is an [[English|English]]"
         short_description = "English contract bridge player"
         wiki_category = "[[Category:English contract bridge players]]"
       when "FRA"
