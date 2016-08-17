@@ -17,21 +17,21 @@ DATE = "2016-07-31"
 ACCESS_DATE = "2016-07-31"
 
 # Get winners
-dir="nabc_winners"
+dir="data/nabc_winners"
 Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
 	file_name = dir + "/" + f
 	next if File.directory? file_name
 	data << File.read(file_name)
 end
 
-dir="nabc_winners/retired"
+dir="data/nabc_winners/retired"
 Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
 	file_name = dir + "/" + f
 	data << File.read(file_name)
 end
 
-# Add other competitions
-dir="competitions"
+# Add other directories to get a list of players from
+dir="data/ebl"
 Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
 	file_name = dir + "/" + f
 	next if File.directory? file_name
@@ -87,7 +87,7 @@ transnational_ref = "<ref>[http://www.worldbridge.org/transnational-open-teams.a
 von_zedtwitz_ref = "<ref>[http://www.fpabridge.org/vonzedtwitz.htm Foundation for the Preservation and Advancement of Bridge - von Zedtwitz Award]</ref>"
 wbf_ref = "<ref name=\"WBF Winners\">[http://www.worldbridge.org/world-team-championships.aspx World Team Championship Winners]</ref>"
 world_senior_teams_ref = "<ref name=\"WBF Senior Teams Winners\">[http://www.worldbridge.org/senior-teams.aspx World Senior Teams Winners]</ref>"
-
+world_women_knockout_teams_ref = "<ref name=\"WBF World Women Knockout Teams Winners\">[https://www.wikipedia.org/wiki/McConnell_Cup World Womens Knockout Teams (McConnell Cup) Winners]</ref>"
 
 
 # | title = "Fishbein"
@@ -118,7 +118,7 @@ event_data.each_line do |csv_row|
 end
 
 # Read in HOF data
-acbl_hof_data = File.read("acbl_hof.csv")
+acbl_hof_data = File.read("data/acbl/acbl_hof.csv")
 acbl_hofs = Array.new
 $acbl_hofs_db = Hash.new { |h, k| h[k] = Hash.new(0) }
 acbl_hof_data.each_line do |csv_row|
@@ -136,7 +136,7 @@ acbl_hof_data.each_line do |csv_row|
 end
 
 # Read in mapping from player name to WBF ID
-wbf_id_data = File.read("wbf_ids.csv")
+wbf_id_data = File.read("data/wbf/wbf_ids.csv")
 wbf_ids = Array.new
 $wbf_ids_db = Hash.new { |h, k| h[k] = Hash.new(0) }
 wbf_id_data.each_line do |csv_row|
@@ -232,40 +232,41 @@ def read_year_name(file)
 end
 
 # Bermuda Bowl
-$bermuda_bowl_winners = read_year_position_name("bermuda_bowl.csv")
-$buffett_cup_winners = read_year_position_name("buffett_cup.csv")
-$venice_cup_winners = read_year_position_name("venice_cup.csv")
-$dorsi_bowl_winners = read_year_position_name("dorsi_bowl.csv")
-$transnational_teams_winners = read_year_position_name("transnational_teams.csv")
-$rosenblum_winners = read_year_position_name("rosenblum.csv")
+$bermuda_bowl_winners = read_year_position_name("data/wbf/bermuda_bowl.csv")
+$buffett_cup_winners = read_year_position_name("data/other/buffett_cup.csv")
+$venice_cup_winners = read_year_position_name("data/wbf/venice_cup.csv")
+$dorsi_bowl_winners = read_year_position_name("data/wbf/dorsi_bowl.csv")
+$transnational_teams_winners = read_year_position_name("data/wbf/transnational_teams.csv")
+$rosenblum_winners = read_year_position_name("data/wbf/rosenblum.csv")
 # World events
-$world_open_pairs_winners = read_year_position_name("world_open_pairs.csv")
-$world_women_pairs_winners = read_year_position_name("world_women_pairs.csv")
-$world_mixed_pairs_winners = read_year_position_name("world_mixed_pairs.csv")
-$world_senior_pairs_winners = read_year_position_name("world_senior_pairs.csv")
-$world_senior_teams_winners = read_year_position_name("world_senior_teams.csv")
-$world_olympiad_senior_teams_winners = read_year_position_name("world_olympiad_senior_teams.csv")
-$world_olympiad_teams_winners = read_year_position_name("world_olympiad_teams.csv")
-$world_olympiad_womens_teams_winners = read_year_position_name("world_olympiad_womens_teams.csv")
+$world_open_pairs_winners = read_year_position_name("data/wbf/world_open_pairs.csv")
+$world_women_pairs_winners = read_year_position_name("data/wbf/world_women_pairs.csv")
+$world_mixed_pairs_winners = read_year_position_name("data/wbf/world_mixed_pairs.csv")
+$world_senior_pairs_winners = read_year_position_name("data/wbf/world_senior_pairs.csv")
+$world_senior_teams_winners = read_year_position_name("data/wbf/world_senior_teams.csv")
+$world_olympiad_senior_teams_winners = read_year_position_name("data/wbf/world_olympiad_senior_teams.csv")
+$world_olympiad_teams_winners = read_year_position_name("data/wbf/world_olympiad_teams.csv")
+$world_olympiad_womens_teams_winners = read_year_position_name("data/wbf/world_olympiad_womens_teams.csv")
+$world_women_knockout_teams_winners = read_year_position_name("data/wbf/world_women_knockout_teams_mcconnell.csv")
 
 # Other events
-$cavendish_pairs_winners = read_year_position_name("cavendish_pairs.csv")
-$gold_cup_winners = read_event_year_position_name("competitions/gold_cup.csv")
+$cavendish_pairs_winners = read_year_position_name("data/other/cavendish_pairs.csv")
+$gold_cup_winners = read_event_year_position_name("data/ebl/gold_cup.csv")
 
 # Honorary
-$acbl_honorary_members_winners = read_year_name("acbl_honorary_members.csv")
+$acbl_honorary_members_winners = read_year_name("data/acbl/acbl_honorary_members.csv")
 # ACBL King of Bridge (handles queen as well)
-$acbl_kob_winners = read_year_name("acbl_kob.csv")
+$acbl_kob_winners = read_year_name("data/acbl/acbl_kob.csv")
 # ACBL Player of the Year
-$acbl_poy_winners = read_year_name("acbl_poy.csv")
+$acbl_poy_winners = read_year_name("data/acbl/acbl_poy.csv")
 # Different winners
-$fishbein_winners = read_year_name("fishbein.csv")
-$goren_winners = read_year_name("goren.csv")
-$herman_winners = read_year_name("herman.csv")
-$mott_smith_winners = read_year_name("mott-smith.csv")
+$fishbein_winners = read_year_name("data/acbl/fishbein.csv")
+$goren_winners = read_year_name("data/acbl/goren.csv")
+$herman_winners = read_year_name("data/acbl/herman.csv")
+$mott_smith_winners = read_year_name("data/acbl/mott-smith.csv")
 # More HOF award
-$acbl_blackwood_winners = read_year_name("acbl_blackwood.csv")
-$acbl_zedtwitz_winners = read_year_name("acbl_zedtwitz.csv")
+$acbl_blackwood_winners = read_year_name("data/acbl/acbl_blackwood.csv")
+$acbl_zedtwitz_winners = read_year_name("data/acbl/acbl_zedtwitz.csv")
 
 # Returns 1 if contains first place.
 def is_first_place(string)
@@ -629,6 +630,10 @@ end
 
 def get_world_olympiad_womens_teams_data(player_name, position, has_alter_ego, alter_egos)
   get_year_position_data($world_olympiad_womens_teams_winners, player_name, position, has_alter_ego, alter_egos)
+end
+
+def get_world_women_knockout_teams_data(player_name, position, has_alter_ego, alter_egos)
+  get_year_position_data($world_women_knockout_teams_winners, player_name, position, has_alter_ego, alter_egos)
 end
 
 def get_cavendish_pairs_data(player_name, position, has_alter_ego, alter_egos)
@@ -1017,112 +1022,119 @@ player_db.each do |ph,pk|
     nentries, years_s = get_bermuda_bowl_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Venice Cup
     nentries, years_s = get_venice_cup_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Venice Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for d'Orsi Cup
     nentries, years_s = get_dorsi_bowl_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Senior Bowl (bridge)|d'Orsi Senior Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Transnational Teams
     nentries, years_s = get_transnational_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Transnational Open Teams Championship]] (#{nentries}) #{years_s} #{transnational_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Rosenblum
     nentries, years_s = get_rosenblum_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Rosenblum Cup]] (#{nentries}) #{years_s} #{rosenblum_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World open pairs
     nentries, years_s = get_world_open_pairs_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Open Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World mixed pairs
     nentries, years_s = get_world_mixed_pairs_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Mixed Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World senior pairs
     nentries, years_s = get_world_senior_pairs_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Senior Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World women pairs
     nentries, years_s = get_world_women_pairs_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Women Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
+    end
+
+    # World women knockout teams
+    nentries, years_s = get_world_women_knockout_teams_data(ph, 1, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[McConnell Cup|World Women Knockout Teams Championship (McConnell Cup)]] (#{nentries}) #{years_s}"
+#      fd.puts ""
     end
 
     # World senior teams
     nentries, years_s = get_world_senior_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Senior Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World olympiad
     nentries, years_s = get_world_olympiad_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Team Olympiad|World Olympiad Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World olympiad
     nentries, years_s = get_world_olympiad_senior_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Team Olympiad|World Olympiad Seniors Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World olympiad
     nentries, years_s = get_world_olympiad_womens_teams_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Team Olympiad|World Olympiad Womens Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Buffett Cup Bowl
     nentries, years_s = get_buffett_cup_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{buffett_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Cavendish
     nentries, years_s = get_cavendish_pairs_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Cavendish Invitational|Cavendish Invitational Pairs]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Gold Cup
     nentries, years_s = get_gold_cup_data(ph, 1, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Gold Cup (bridge)|Gold Cup]] (#{nentries}) #{years_s} #{gold_cup_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     if (nnabc_wins > 0) then
@@ -1170,111 +1182,118 @@ player_db.each do |ph,pk|
 
     if (nentries > 0) then
       fd.puts "* [[Bermuda Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Venice Cup
     nentries, years_s = get_venice_cup_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Venice Cup]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for d'Orsi Cup
     nentries, years_s = get_dorsi_bowl_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Senior Bowl (bridge)|d'Orsi Senior Bowl]] (#{nentries}) #{years_s} #{wbf_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Transnational Teams
     nentries, years_s = get_transnational_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Transnational Open Teams Championship]] (#{nentries}) #{years_s} #{transnational_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Rosenblum
     nentries, years_s = get_rosenblum_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Rosenblum Cup]] (#{nentries}) #{years_s} #{rosenblum_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World open pairs
     nentries, years_s = get_world_open_pairs_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Open Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     nentries, years_s = get_world_mixed_pairs_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Mixed Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World senior pairs
     nentries, years_s = get_world_senior_pairs_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Senior Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World women pairs
     nentries, years_s = get_world_women_pairs_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Women Pairs Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
+    end
+
+    # World women knockout teams
+    nentries, years_s = get_world_women_knockout_teams_data(ph, 2, has_alter_egos, alter_egos)
+    if (nentries > 0) then
+      fd.puts "* [[McConnell Cup|World Women Knockout Teams Championship (McConnell Cup)]] (#{nentries}) #{years_s}"
+#      fd.puts ""
     end
 
     # World senior teams
     nentries, years_s = get_world_senior_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Senior Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World olympiad
     nentries, years_s = get_world_olympiad_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Team Olympiad|World Olympiad Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World olympiad
     nentries, years_s = get_world_olympiad_senior_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Team Olympiad|World Olympiad Seniors Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # World olympiad
     nentries, years_s = get_world_olympiad_womens_teams_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[World Team Olympiad|World Olympiad Womens Teams Championship]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Buffett Cup Bowl
     nentries, years_s = get_buffett_cup_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Buffett Cup]] (#{nentries}) #{years_s} #{buffett_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Cavendish
     nentries, years_s = get_cavendish_pairs_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Cavendish Invitational|Cavendish Invitational Pairs]] (#{nentries}) #{years_s}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     # Check for Gold Cup
     nentries, years_s = get_gold_cup_data(ph, 2, has_alter_egos, alter_egos)
     if (nentries > 0) then
       fd.puts "* [[Gold Cup (bridge)|Gold Cup]] (#{nentries}) #{years_s} #{gold_cup_ref}"
-      fd.puts ""
+#      fd.puts ""
     end
 
     if (nnabc_seconds > 0) then
@@ -1353,7 +1372,7 @@ player_db.each do |ph,pk|
 #    fd.puts "| DATE OF DEATH     ="
 #    fd.puts "| PLACE OF DEATH    ="
 #    fd.puts "}}"
-#    fd.puts "{{DEFAULTSORT:#{last_name}, #{first_names}}}"
+    fd.puts "{{DEFAULTSORT:#{last_name}, #{first_names}}}"
     fd.puts "#{wiki_category}"
     fd.puts ""
 #    fd.puts "{{Bridge-game-stub}}"

@@ -265,7 +265,6 @@ Robert A. McPherran
 Richard Kahn
 Charles S. Lochridge
 Sam Fry Jr.
-Jo Anna Stansby
 Pierre Zimmermann
 Franck Multon
 Arthur G. Robinson
@@ -297,3 +296,4 @@ Morrie Elis
 Doris Fuller
 Edith Freilich
 Milton Ellenby
+Waldemar von Zedtwitz

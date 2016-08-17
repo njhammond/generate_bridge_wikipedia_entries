@@ -6,37 +6,49 @@ Alan Sontag
 Alan Truscott
 Albert Hodges Morehead
 Albert Weiss
+Alex Tschekaloff
+Alexander Smirnov
 Alfred Sheinwold
 Alfredo Versace
 Alicia Kempner
+Allan Falk
+Allan Graves
 Allan Siebert
 Allan Stauber
+Alvin Landy
 Alvin Roth
 Amalya Lyle Kearse
+Antonio Sementa
 Ari Greenberg
 Arnie Fisher
 Arthur G. Robinson
 Arthur S. Goldsmith
 B. Jay Becker
+Barbara Rappaport
 Barry Crane
 Bart Bramley
+Bas Drijver
 Becky Rogers
 Ben Fain
 Benito Garozzo
 Bernie Chazen
 Beth Palmer
 Betty Ann Kennedy
+Bill Edelstein
 Bill Root
 Billy Eisenberg
 Bjorn Fallenius
+Bob Blanchard
 Bob Etter
 Bob Hamman
 Bobby Goldman
 Bobby Levin
 Bobby Nail
 Bobby Wolff
+Boye Brogeland
 Brad Moss
 Brian Glubok
+Brian Platnick
 C. C. Wei
 Carl Hudecek
 Carol Crawford
@@ -49,6 +61,7 @@ Charles J. Solomon
 Charles Kalme
 Cheri Bjerkan
 Chip Martel
+Chris Compton
 Chris Willenken
 Christal Henner
 Chuck Burger
@@ -56,6 +69,7 @@ Claudio Nunes
 Curtis Cheek
 Dan Morse
 Dan Rotman
+Daniel Korbel
 Daniela von Arnim
 David Berkowitz
 David Bruce
@@ -79,15 +93,18 @@ Edith Kemp
 Edward Hymes, Jr.
 Edward O. Taylor
 Edwin Kantar
+Eldad Ginossar
 Ely Culbertson
 Emma Jean Hawes
 Eric Greco
 Eric R. Murray
 Eric Rodwell
+Espen Lindqvist
 Eunice Rosen
 Fred Gitelman
 Fred Hamilton
 Fred Stewart
+Frederic Volcker
 Fulvio Fantoni
 Gail Greenberg
 Gail Moss
@@ -107,6 +124,7 @@ George S. Kaufman
 Gerald Caravelli
 Giorgio Duboin
 Grant Baze
+Haig Tchamitch
 Harold Harkavy
 Harold Lilie
 Harold Stirling Vanderbilt
@@ -120,6 +138,7 @@ Hjordis Eythorsdottir
 Howard Schenken
 Howard Weinstein
 Hugh Ross
+Huub Bertens
 Ira Rubin
 Irina Levitina
 Ivar Stakgold
@@ -128,8 +147,11 @@ Jacqui Mitchell
 Jaggy Shivdasani
 James Cayne
 James Lemon
+Jan Jansma
 Jan Martel
 Janice Seamon-Molson
+Jay Apfelbaum, 
+Jay Borker
 Jeff Glick
 Jeff Meckstroth
 Jeff Rubens
@@ -146,13 +168,17 @@ JoAnna Stansby
 Joel Wooldridge
 John Diamond
 John Gerber
+John Hurd
 John Mohan
 John R. Crawford
 John Schermer
 John Sutherlin
 John Swanson
+Josef PIekarek
+Josef Piekarek
 Joseph Bowne Elwell
 Josephine Culbertson
+Joshua Donn
 Juanita Chambers
 Judi Radin
 Karen McCallum
@@ -173,6 +199,8 @@ Lew Stansby
 Lewis L. Mathe
 Lisa Berkowitz
 Lorenzo Lauria
+Lotan Fisher
+Lou Ann O'Rourke
 Lou Bluhm
 Louis H. Watson
 Lynn Baker
@@ -196,6 +224,7 @@ Merwyn D. Maier
 Meyer Schleifer
 Michael Kamil
 Michael Ledeen
+Michael Polowan
 Michael Rosenberg
 Michael Seamon
 Michael T. Gottlieb
@@ -210,6 +239,7 @@ Milton Work
 Morrie Elis
 Nancy Gruver
 Nick Nickell
+Nikolay Demirev
 Norman Kay
 Olive Peterson
 Oswald Jacoby
@@ -227,22 +257,31 @@ Peter Weichsel
 Petra Hamman
 Phil Feldesman
 Phil Gordon
+Pratap Rajadhyaksha
 Ralph Katz
+Ravindra Murthy
 Renee Mancuso
 Rhoda Walsh
 Richard Coren
 Richard DeMartino
 Richard Freeman
 Richard H. Katz
+Richard Khautin
 Richard L. Frey
 Richard Pavlicek
+Richard Schwartz
 Richard Zeckhauser
 Rita Shugart
 Robert F. Jordan
 Robert H. Lipsitz
+Robert Lebi
+Robert Levin
 Roger Bates
+Roger Lee
 Ron Andersen
+Ron Gerard
 Ron Rubin
+Ron Schwartz
 Ron Von der Porten
 Rose Meltzer
 Ross Grabel
@@ -253,13 +292,17 @@ Russ Ekeblad
 Ruth Sherman
 Sabine Auken
 Sally Young
+Sam Lev
 Sam Stayman
 Samuel M. Stayman
 Seymon Deutsch
 Shawn Quinn
 Sherman Stearns
 Sidney H. Lazard
+Sidney Lazard
 Sidney Silodor
+Sjoert Brink
+Sojert Brink
 Sol Mogal
 Steve Garner
 Steve Landen
@@ -268,15 +311,21 @@ Steve Weinstein
 Sue Picus
 Sylvia Moss
 Sylvie Willard
+Tarek Sadek
 Terry W. Gee
 Theodore A. Lightner
 Theodore Lightner
+Thomas Bessis
 Thomas K. Sanders
 Tobi Sokolow
 Tobias Stone
 Tommy Prothro
+Tony Forrester
 Waldemar K. von Zedtwitz
 Waldemar von Zedtwitz
+Walid Elahmady
+Warren Kornfeld
+William Flannery
 William Grieve
 William Rosen
 William Seamon
