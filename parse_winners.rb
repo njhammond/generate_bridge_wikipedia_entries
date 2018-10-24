@@ -19,6 +19,7 @@ ACCESS_DATE = "2016-07-31"
 # Get winners
 dir="data/nabc_winners"
 Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
+	next if f[0] == '.'
 	file_name = dir + "/" + f
 	next if File.directory? file_name
 	data << File.read(file_name)
@@ -26,6 +27,7 @@ end
 
 dir="data/nabc_winners/retired"
 Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
+	next if f[0] == '.'
 	file_name = dir + "/" + f
 	data << File.read(file_name)
 end
@@ -33,6 +35,7 @@ end
 # Add other directories to get a list of players from
 dir="data/ebl"
 Dir.entries(dir).select {|f| !File.directory? f}.each do |f|
+	next if f[0] == '.'
 	file_name = dir + "/" + f
 	next if File.directory? file_name
 	data << File.read(file_name)
@@ -715,6 +718,7 @@ end
 # This is from the winners.csv file
 # Create an array for each line
 data.each_line do |csv_row|
+#	puts "csv_row=#{csv_row}"
 	fields = csv_row.chomp.split(CSV_DELIMITER).map(&:strip)
   if (first_line == 1) then
 	  first_line = 0
